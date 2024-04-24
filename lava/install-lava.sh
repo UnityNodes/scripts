@@ -102,4 +102,3 @@ printColor blue "Check synchronization  >>> \e[1mlavad status | jq | grep \"catc
 echo ""
 printColor blue "Enjoy to Unity Nodes   >>> \e[1mhttps://t.me/unitynodes\e[0m"
 printLine
-
