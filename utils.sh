@@ -20,7 +20,9 @@ function printLogo {
   bash <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/logo.sh)
 }
 
+
 function printLine {
+  echo ""
   echo "---------------------------------------------------------------------------------------"
 }       
 
