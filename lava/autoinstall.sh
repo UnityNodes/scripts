@@ -4,7 +4,8 @@ source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils
 
 printLogo
 
-echo "Please enter the node moniker:"
+echo
+printColor blue "Please enter the node moniker:"
 read -r NODE_MONIKER
 
 CHAIN_ID="lava-testnet-2"
