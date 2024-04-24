@@ -4,7 +4,7 @@ source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils
 
 printLogo
 
-echo
+echo ""
 printColor blue "Please enter the node moniker:"
 read -r NODE_MONIKER
 
