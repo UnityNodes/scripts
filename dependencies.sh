@@ -13,3 +13,5 @@ if ! [ -x "$(command -v go)" ]; then
   source <(curl -s "https://raw.githubusercontent.com/UnityNodes/scripts/main/install-go.sh")
   source .bash_profile
 fi
+
+echo "$(go version)"
