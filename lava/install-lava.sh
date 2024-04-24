@@ -102,10 +102,10 @@ sudo systemctl start lavad
 ### Useful commands
 echo ""
 printLine
-printColor blue "Check your logs      >>> \e[1mjournalctl -u lavad -f --no-hostname -o cat\e[0m"
+printColor blue "Check your logs        >>> \e[1mjournalctl -u lavad -f --no-hostname -o cat\e[0m"
 echo ""
-printColor yellow "Check synchronization >>> \e[1mlavad status | jq | grep \"catching_up\"\e[0m"
+printColor blue "Check synchronization  >>> \e[1mlavad status | jq | grep \"catching_up\"\e[0m"
 echo ""
-printColor yellow "Enjoy to Unity Nodes >>> \e[1mhttps://t.me/unitynodes\e[0m"
+printColor blue "Enjoy to Unity Nodes   >>> \e[1mhttps://t.me/unitynodes\e[0m"
 printLine
 
