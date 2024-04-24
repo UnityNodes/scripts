@@ -6,10 +6,9 @@ source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils
 clear
 printLogo
 
-echo ""
-echo -e "\e[30;47m Please enter the node moniker: \e[0m\c"
+echo -e "\e[30;47m Please enter the node moniker:\e[0m"
+echo -en ">>> "
 read -r NODE_MONIKER
-
 
 ### Chain ID, Binary Version Node
 CHAIN_ID="lava-testnet-2"
