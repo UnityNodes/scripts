@@ -15,7 +15,7 @@ source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/depen
 
 ### Bulding binaries
 echo ""
-printColor blue "4. Building binaries"
+printColor blue "[4/6] Building binaries"
 
 export LAVA_BINARY=lavad
 
@@ -80,14 +80,14 @@ EOF
 
 ### Downoload snapshot
 echo ""
-printColor blue "5. Downloading snapshot for fast synchronization" 
+printColor blue "[5/6] Downloading snapshot for fast synchronization" 
 
 lavad tendermint unsafe-reset-all --home $HOME/.lava --keep-addr-book 
 curl https://snapshots.aknodes.net/snapshots/lava/snapshot-lava.AKNodes.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
 
 ### Start service and run node
 echo ""
-printColor blue "Start service and run node"
+printColor blue "[6/6] Start service and run node"
 
 sudo systemctl daemon-reload
 sudo systemctl enable lavad
