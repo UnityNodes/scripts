@@ -32,13 +32,6 @@ lavad config keyring-backend test
 lavad config chain-id $CHAIN_ID
 lavad init "$NODE_MONIKER" --chain-id $CHAIN_ID
 
-### Downoload genesis and addrbook
-echo ""
-printColor blue "5. Download genesis and addrbook"
-
-curl -s https://raw.githubusercontent.com/lavanet/lava-config/main/testnet-2/genesis_json/genesis.json > $HOME/.lava/config/genesis.json
-curl -Ls https://snapshots.aknodes.net/snapshots/lava/addrbook.json > $HOME/.lava/config/addrbook.json
-
 ### Seed and peers
 echo ""
 printColor "Configuring seed and peers"
@@ -69,10 +62,14 @@ sed -i \
 
 sed -i -e 's/broadcast-mode = ".*"/broadcast-mode = "sync"/g' $HOME/.lava/config/config.toml
 
-### Create service
+### Downoload genesis and addrbook
 echo ""
-printColor blue "Create  service"
+printColor blue "5. Download genesis and addrbook"
 
+curl -s https://raw.githubusercontent.com/lavanet/lava-config/main/testnet-2/genesis_json/genesis.json -o $HOME/.lava/config/genesis.json
+curl -Ls https://snapshots.aknodes.net/snapshots/lava/addrbook.json -o $HOME/.lava/config/addrbook.json
+
+### Create service
 sudo tee /etc/systemd/system/lavad.service > /dev/null << EOF
 [Unit]
 Description=Lava Network Node
@@ -105,7 +102,10 @@ sudo systemctl start lavad
 ### Useful commands
 echo ""
 printLine
-printColor yellow "Check logs lava node >>> journalctl -u lavad -f --no-hostname -o cat "
-printColor yellow "Check synchonization >>> lavad status | jq | grep "catching_up" "
-printColor yellow "Enjoy to Unity Nodes >>>  https://t.me/unitynodes "
+printColor blue "Check your logs      >>> \e[1mjournalctl -u lavad -f --no-hostname -o cat\e[0m"
+echo ""
+printColor yellow "Check synchronization >>> \e[1mlavad status | jq | grep \"catching_up\"\e[0m"
+echo ""
+printColor yellow "Enjoy to Unity Nodes >>> \e[1mhttps://t.me/unitynodes\e[0m"
 printLine
+
