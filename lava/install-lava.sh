@@ -7,7 +7,7 @@ clear
 printLogo
 
 echo ""
-echo -e "\e[30;47m Please enter the node moniker:\e[0m\c"
+echo -e "\e[30;47m Please enter the node moniker: \e[0m\c"
 read -r NODE_MONIKER
 
 
