@@ -1,16 +1,19 @@
 #!/bin/bash
 
+### Utils Unity Nodes
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 clear
 printLogo
 
-printColor blue "Please enter the node moniker:"
-read -r NODE_MONIKER
+echo ""
+printColor blue "Please enter the node moniker:" read -r NODE_MONIKER
 
+### Chain ID, Binary Version Node
 CHAIN_ID="lava-testnet-2"
 BINARY_VERSION="v1.2.0"
 
+### Install Dependencies
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/dependencies.sh)
 
 ### Bulding binaries
@@ -96,9 +99,9 @@ sudo systemctl start lavad
 ### Useful commands
 echo ""
 printLine
-printColor blue "Check your logs        >>> \e[1mjournalctl -u lavad -f --no-hostname -o cat\e[0m"
+printColor blue "Check your logs        >>> journalctl -u lavad -f --no-hostname -o cat "
 echo ""
-printColor blue "Check synchronization  >>> \e[1mlavad status | jq | grep \"catching_up\"\e[0m"
+printColor blue "Check synchronization  >>> lavad status | jq | grep \"catching_up\" "
 echo ""
-printColor blue "Enjoy to Unity Nodes   >>> \e[1mhttps://t.me/unitynodes\e[0m"
+printColor blue "Enjoy to Unity Nodes   >>> https://t.me/unitynodes "
 printLine
