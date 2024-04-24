@@ -60,9 +60,6 @@ sed -i \
 sed -i -e 's/broadcast-mode = ".*"/broadcast-mode = "sync"/g' $HOME/.lava/config/config.toml
 
 ### Downoload genesis and addrbook
-echo ""
-printColor blue "5. Download genesis and addrbook"
-
 curl -s https://raw.githubusercontent.com/lavanet/lava-config/main/testnet-2/genesis_json/genesis.json -o $HOME/.lava/config/genesis.json
 curl -Ls https://snapshots.aknodes.net/snapshots/lava/addrbook.json -o $HOME/.lava/config/addrbook.json
 
@@ -83,7 +80,7 @@ EOF
 
 ### Downoload snapshot
 echo ""
-printColor blue "6. Downloading snapshot for fast synchronization" 
+printColor blue "5. Downloading snapshot for fast synchronization" 
 
 lavad tendermint unsafe-reset-all --home $HOME/.lava --keep-addr-book 
 curl https://snapshots.aknodes.net/snapshots/lava/snapshot-lava.AKNodes.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
