@@ -7,7 +7,9 @@ clear
 printLogo
 
 echo ""
-printColor blue "Please enter the node moniker:" read -r NODE_MONIKER
+echo -e "\e[30;47m Please enter the node moniker:\e[0m\c"
+read -r NODE_MONIKER
+
 
 ### Chain ID, Binary Version Node
 CHAIN_ID="lava-testnet-2"
