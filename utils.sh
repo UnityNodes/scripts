@@ -51,3 +51,24 @@ function printBlue {
 function printYellow {
 	echo -e "\e[1m\e[33m${1}\e[0m"
 }
+
+function anim() {
+    local -i width=50
+    local -i progress=0
+    local -i step=7
+
+    while ((progress <= width)); do
+        local bar="["
+        for ((i = 0; i < progress; i++)); do
+            bar+="="
+        done
+        for ((i = progress; i < width; i++)); do
+            bar+=" "
+        done
+        bar+="]"
+
+        printf "\r%s %d%%" "$bar" "$((progress * 100 / width))"
+        ((progress += step))
+        sleep 0.05
+    done
+}
