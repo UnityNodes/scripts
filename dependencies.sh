@@ -3,21 +3,13 @@
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 echo ""
-anim
-echo ""
 printColor blue "[1/6] Updating packages"
 sudo apt update && sudo apt upgrade
 
-
-echo ""
-anim
 echo ""
 printColor blue "[2/6] Install dependencies"
 sudo apt install -y lz4 jq make git gcc build-essential curl chrony unzip gzip snapd tmux bc
 
-
-echo ""
-anim
 echo ""
 printColor blue "[3/6] Install go" && sleep 1
 if ! [ -x "$(command -v go)" ]; then
