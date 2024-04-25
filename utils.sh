@@ -52,7 +52,7 @@ function printYellow {
 	echo -e "\e[1m\e[33m${1}\e[0m"
 }
 
-function anim() {
+function anima() {
     local -i width=50
     local -i progress=0
     local -i step=7
