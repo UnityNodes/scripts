@@ -31,3 +31,24 @@ function addToPath {
         source $HOME/.bash_profile
     fi
 }
+
+function anim() {
+    local -i width=50
+    local -i progress=0
+    local -i step=7
+
+    while ((progress <= width)); do
+        local bar="["
+        for ((i = 0; i < progress; i++)); do
+            bar+="="
+        done
+        for ((i = progress; i < width; i++)); do
+            bar+=" "
+        done
+        bar+="]"
+
+        printf "\r%s %d%%" "$bar" "$((progress * 100 / width))"
+        ((progress += step))
+        sleep 0.05
+    done
+}
