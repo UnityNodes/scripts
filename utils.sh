@@ -31,3 +31,23 @@ function addToPath {
         source $HOME/.bash_profile
     fi
 }
+
+function printAddition {
+    echo -e "\e[4m${1}\e[0m"
+}
+
+function printGreen {
+    echo -e "\e[1m\e[32m${1}\e[0m"
+}
+
+function printRed {
+    echo -e "\e[1m\e[31m${1}\e[0m"	
+}
+
+function printBlue {
+	echo -e "\e[1m\e[34m${1}\e[0m"
+}
+
+function printYellow {
+	echo -e "\e[1m\e[33m${1}\e[0m"
+}
