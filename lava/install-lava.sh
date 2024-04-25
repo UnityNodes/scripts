@@ -32,6 +32,7 @@ make install
 
 make build
 
+source $HOME/.bash_profile
 lavad config keyring-backend test
 lavad config chain-id $CHAIN_ID
 lavad init "$NODE_MONIKER" --chain-id $CHAIN_ID
