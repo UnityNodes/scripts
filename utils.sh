@@ -16,7 +16,7 @@ printColor() {
     esac
 }
 
-function printLogo {
+function logo {
   bash <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/logo.sh)
 }
 
