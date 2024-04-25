@@ -83,12 +83,15 @@ LimitNOFILE=10000
 WantedBy=multi-user.target
 EOF
 
+anim
+
 ### Downoload snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
 
 lavad tendermint unsafe-reset-all --home $HOME/.lava --keep-addr-book 
 curl https://snapshots.aknodes.net/snapshots/lava/snapshot-lava.AKNodes.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
+anim
 
 ### Start service and run node
 echo ""
