@@ -1,5 +1,3 @@
-source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
-
 echo  "
 
 
@@ -9,7 +7,5 @@ echo  "
   / /_/ /   / / / / / /  / /_   / /_/ /         / /|  /  / /_/ // /_/ /  /  __/ (__  ) 
   \____/   /_/ /_/ /_/   \__/   \__, /         /_/ |_/   \____/ \__,_/   \___/ /____/  
                                /____/                                                  
-
-printColor blue "Join and follow us                         >>> https://t.me/unitynodes "                                                                 
-printColor blue "Join and follow us                         >>> https://twitter.com/UnityNodes"
+"
 echo  "_______________________________________________________________________________________"
