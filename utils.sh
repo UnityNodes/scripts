@@ -72,3 +72,7 @@ function anima() {
         sleep 0.1
     done
 }
+
+TEST=test-network-1
+
+
