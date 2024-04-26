@@ -2,6 +2,7 @@
 
 ### Utils Unity Nodes
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
+source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/logotest.sh)
 
 ### Function autoupgrade
 CHAIN=$1
@@ -11,7 +12,7 @@ VERSION=$4
 BINARY=$5
 PORT_RPC=$6
 
-logo
+printLogo
 
 echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printBlue "$BLOCK")" && sleep 1
 
