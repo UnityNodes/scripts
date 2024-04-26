@@ -83,5 +83,5 @@ sidechain=side-testnet-3
 dymensionchain=
 cascadiachain=
 zetachain=
-0gchain=zgtendermint_9000-1
+ogchain=zgtendermint_9000-1
 
