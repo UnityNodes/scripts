@@ -2,7 +2,6 @@
 
 ### Utils Unity Nodes
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
-source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/logotest.sh)
 
 ### Function autoupgrade
 CHAIN=$1
