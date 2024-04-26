@@ -11,7 +11,7 @@ VERSION=$4
 BINARY=$5
 PORT_RPC=$6
 
-printLogo
+logo
 
 echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printBlue "$BLOCK")" && sleep 1
 
