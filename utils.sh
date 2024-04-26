@@ -85,3 +85,15 @@ cascadiachain=
 zetachain=
 ogchain=zgtendermint_9000-1
 
+s1() {
+  local green_text="In progress"
+  local gray_text="In progress"
+  local delay=1  # Затримка у секундах
+
+  while true; do
+    printColor "green" "$green_text"
+    sleep $delay
+    printColor "black" "$gray_text"
+    sleep $delay
+  done
+}
