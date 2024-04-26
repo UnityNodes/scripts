@@ -11,9 +11,14 @@ VERSION=$4
 BINARY=$5
 PORT_RPC=$6
 
-printLogo
+logo
 
-echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printBlue "$BLOCK")" && sleep 1
+echo -e "Node $(printBlue "$CHAIN") upgraded to version $(printBlue "$VERSION") on block height $(printYellow "$BLOCK")" && sleep 1 && echo ""
+echo -e "You are currently in a $(printYellow "tmux session")."
+echo -e "When you want to detach from the Tmux session, use the key combination: $(printYellow "CTRL + b"), then release both keys and press $(printYellow 'd'). If that doesn't work, simply $(printYellow 'reconnect') to the server."
+echo -e "To check for an active tmux session after reconnection, you can use the command: $(printYellow 'tmux ls')."
+echo -e "To attach to an existing tmux session, use the command: $(printYellow 'tmux attach-session -t session_name')."
+echo ""
 
 function AutoUpgrade() {
   local height
@@ -25,23 +30,23 @@ function AutoUpgrade() {
       height=$($BINARY status --node="tcp://127.0.0.1:$PORT_RPC" 2>&1 | jq -r '.SyncInfo.latest_block_height // .sync_info.latest_block_height')
     fi
 
-    echo -e "Current block height: $(printYellow "$height")"
-    sleep 1
+    echo -e "Current block height: $(printBlue "$height")"
+    sleep 5
   done
 
   bash <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/${CHAIN,,}/upgrade/${VERSION}.sh)
   printBlue "Your node upgraded to version: $VERSION" && sleep 1
   $BINARY version --long | head
-}
 
-### Useful commands
-echo ""
-printLine
-printColor blue "Check your logs        >>> journalctl -u lavad -f --no-hostname -o cat "
-echo ""
-printColor blue "Check synchronization  >>> lavad status | jq | grep \"catching_up\" "
-echo ""
-printColor blue "Enjoy to Unity Nodes   >>> https://t.me/unitynodes "
-printLine
+  ### Useful commands
+  echo ""
+  printLine
+  printColor blue "Check your logs        >>> journalctl -u lavad -f --no-hostname -o cat "
+  echo ""
+  printColor blue "Check synchronization  >>> lavad status | jq | grep \"catching_up\" "
+  echo ""
+  printColor blue "Enjoy to Unity Nodes   >>> https://t.me/unitynodes "
+  printLine
+}
 
 AutoUpgrade
