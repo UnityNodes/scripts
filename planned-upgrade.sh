@@ -25,7 +25,7 @@ function AutoUpgrade() {
       height=$($BINARY status --node="tcp://127.0.0.1:$PORT_RPC" 2>&1 | jq -r '.SyncInfo.latest_block_height // .sync_info.latest_block_height')
     fi
 
-    echo -e "Current block height: $(printBlue "$height")"
+    echo -e "Current block height: $(printYellow "$height")"
     sleep 1
   done
 
