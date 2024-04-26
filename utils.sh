@@ -12,7 +12,7 @@ printColor() {
         "yellow")
             echo -e "\e[1m\e[33m${text}\e[0m" ;;
 	"black") 
-	    echo -e "\e[1m\e[30m${text}\e[0m"
+	    echo -e "\e[1m\e[30m${text}\e[0m" ;;
         *)
             echo "Unsupported color" ;;
     esac
