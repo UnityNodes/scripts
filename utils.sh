@@ -76,3 +76,12 @@ function anima() {
 TEST=test-network-1
 
 
+#Chain-id
+wardenchain=buenavista-1
+lavachain=lava-testnet-2
+sidechain=side-testnet-3
+dymensionchain=
+cascadiachain=
+zetachain=
+0gchain=zgtendermint_9000-1
+
