@@ -11,6 +11,8 @@ printColor() {
             echo -e "\e[1m\e[34m${text}\e[0m" ;;
         "yellow")
             echo -e "\e[1m\e[33m${text}\e[0m" ;;
+	"black") 
+	    echo -e "\e[1m\e[30m${text}\e[0m"
         *)
             echo "Unsupported color" ;;
     esac
@@ -87,13 +89,13 @@ ogchain=zgtendermint_9000-1
 
 function s1() {
   local green_text="In progress"
-  local gray_text="In progress"
+  local black_text="In progress"
   local delay=1  # Затримка у секундах
 
   while true; do
     printColor "green" "$green_text"
     sleep $delay
-    printColor "black" "$gray_text"
+    printColor "black" "$black_text"
     sleep $delay
   done
 }
