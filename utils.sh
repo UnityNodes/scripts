@@ -86,16 +86,3 @@ dymensionchain=
 cascadiachain=
 zetachain=
 ogchain=zgtendermint_9000-1
-
-function s1() {
-  local green_text="In progress"
-  local black_text="In progress"
-  local delay=1  # Затримка у секундах
-
-  while true; do
-    printColor "green" "$green_text"
-    sleep $delay
-    printColor "black" "$black_text"
-    sleep $delay
-  done
-}
