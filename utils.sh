@@ -85,7 +85,7 @@ cascadiachain=
 zetachain=
 ogchain=zgtendermint_9000-1
 
-s1() {
+function s1() {
   local green_text="In progress"
   local gray_text="In progress"
   local delay=1  # Затримка у секундах
