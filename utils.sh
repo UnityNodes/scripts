@@ -57,7 +57,7 @@ function printYellow {
 function anima() {
     local -i width=50
     local -i progress=0
-    local -i step=5
+    local -i step=7
 
     while ((progress <= width)); do
         local bar="["
@@ -71,11 +71,10 @@ function anima() {
 
         printf "\r%s %d%%" "$bar" "$((progress * 100 / width))"
         ((progress += step))
-        sleep 0.1
+        sleep 0.05
     done
 }
 
-TEST=test-network-1
 
 
 #Chain-id
