@@ -4,7 +4,7 @@ source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils
 
 echo ""
 printColor blue "[1/6] Updating packages"
-sudo apt update && sudo apt upgrade
+sudo apt update && sudo apt upgrade -y
 
 echo ""
 printColor blue "[2/6] Install dependencies"
