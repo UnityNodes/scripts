@@ -10,16 +10,17 @@ echo -e "\e[30;47m Please enter the node moniker:\e[0m"
 echo -en ">>> "
 read -r NODE_MONIKER
 
-### Chain ID, Binary Version Node
-CHAIN_ID="lava-testnet-2"
-BINARY_VERSION="v1.2.0"
-
 ### Install Dependencies
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/dependencies.sh)
 
 ### Bulding binaries
 echo ""
 printColor blue "[4/6] Building binaries"
+
+CHAIN_ID="lava-testnet-2"
+CHAIN_DENOM="ulava"
+BINARY_NAME="lavad"
+BINARY_VERSION_TAG="v1.2.0"
 
 export LAVA_BINARY=lavad
 
@@ -30,12 +31,14 @@ cd lava || return
 git checkout v1.2.0
 make install
 
-make build
-
-source $HOME/.bash_profile
 lavad config keyring-backend test
 lavad config chain-id $CHAIN_ID
 lavad init "$NODE_MONIKER" --chain-id $CHAIN_ID
+source .bash_profile
+
+### Downoload genesis and addrbook
+curl -s https://raw.githubusercontent.com/lavanet/lava-config/main/testnet-2/genesis_json/genesis.json -o $HOME/.lava/config/genesis.json
+curl -Ls https://snapshots.aknodes.net/snapshots/lava/addrbook.json -o $HOME/.lava/config/addrbook.json
 
 ### Seed and peers
 SEEDS="3a445bfdbe2d0c8ee82461633aa3af31bc2b4dc0@testnet2-seed-node.lavanet.xyz:26656,e593c7a9ca61f5616119d6beb5bd8ef5dd28d62d@testnet2-seed-node2.lavanet.xyz:26656"
@@ -64,10 +67,6 @@ sed -i \
 
 sed -i -e 's/broadcast-mode = ".*"/broadcast-mode = "sync"/g' $HOME/.lava/config/config.toml
 
-### Downoload genesis and addrbook
-curl -s https://raw.githubusercontent.com/lavanet/lava-config/main/testnet-2/genesis_json/genesis.json -o $HOME/.lava/config/genesis.json
-curl -Ls https://snapshots.aknodes.net/snapshots/lava/addrbook.json -o $HOME/.lava/config/addrbook.json
-
 ### Create service
 sudo tee /etc/systemd/system/lavad.service > /dev/null << EOF
 [Unit]
@@ -83,15 +82,13 @@ LimitNOFILE=10000
 WantedBy=multi-user.target
 EOF
 
-anim
-
 ### Downoload snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
 
 lavad tendermint unsafe-reset-all --home $HOME/.lava --keep-addr-book 
 curl https://snapshots.aknodes.net/snapshots/lava/snapshot-lava.AKNodes.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
-anim
+
 
 ### Start service and run node
 echo ""
