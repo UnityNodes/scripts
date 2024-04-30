@@ -40,32 +40,19 @@ source .bash_profile
 curl -s https://raw.githubusercontent.com/lavanet/lava-config/main/testnet-2/genesis_json/genesis.json -o $HOME/.lava/config/genesis.json
 curl -Ls https://snapshots.aknodes.net/snapshots/lava/addrbook.json -o $HOME/.lava/config/addrbook.json
 
-### Seed and peers
-SEEDS="3a445bfdbe2d0c8ee82461633aa3af31bc2b4dc0@testnet2-seed-node.lavanet.xyz:26656,e593c7a9ca61f5616119d6beb5bd8ef5dd28d62d@testnet2-seed-node2.lavanet.xyz:26656"
-PEERS=""
-sed -i 's|^seeds *=.*|seeds = "'$SEEDS'"|; s|^persistent_peers *=.*|persistent_peers = "'$PEERS'"|' $HOME/.lava/config/config.toml
+### Seed config
+sed -i -e 's|^seeds *=.*|seeds = "3a445bfdbe2d0c8ee82461633aa3af31bc2b4dc0@prod-pnet-seed-node.lavanet.xyz:26656,e593c7a9ca61f5616119d6beb5bd8ef5dd28d62d@prod-pnet-seed-node2.lavanet.xyz:26656,ade4d8bc8cbe014af6ebdf3cb7b1e9ad36f412c0@testnet-seeds.polkachu.com:19956,eb7832932626c1c636d16e0beb49e0e4498fbd5e@lava-testnet-seed.itrocket.net:20656"|' $HOME/.lava/config/config.toml
 
-sed -i 's|^pruning *=.*|pruning = "custom"|g' $HOME/.lava/config/app.toml
-sed -i 's|^pruning-keep-recent  *=.*|pruning-keep-recent = "100"|g' $HOME/.lava/config/app.toml
-sed -i 's|^pruning-interval *=.*|pruning-interval = "10"|g' $HOME/.lava/config/app.toml
-sed -i 's|^snapshot-interval *=.*|snapshot-interval = 0|g' $HOME/.lava/config/app.toml
 
-sed -i 's|^minimum-gas-prices *=.*|minimum-gas-prices = "0.025ulava"|g' $HOME/.lava/config/app.toml
-sed -i 's|^prometheus *=.*|prometheus = true|' $HOME/.lava/config/config.toml
+### Minimum gas price,prometheus
+sed -i -e 's|^minimum-gas-prices *=.*|minimum-gas-prices = "0.000001ulava"|' $HOME/.lava/config/app.toml
 
+### Set pruning
 sed -i \
-  -e 's/timeout_commit = ".*"/timeout_commit = "30s"/g' \
-  -e 's/timeout_propose = ".*"/timeout_propose = "1s"/g' \
-  -e 's/timeout_precommit = ".*"/timeout_precommit = "1s"/g' \
-  -e 's/timeout_precommit_delta = ".*"/timeout_precommit_delta = "500ms"/g' \
-  -e 's/timeout_prevote = ".*"/timeout_prevote = "1s"/g' \
-  -e 's/timeout_prevote_delta = ".*"/timeout_prevote_delta = "500ms"/g' \
-  -e 's/timeout_propose_delta = ".*"/timeout_propose_delta = "500ms"/g' \
-  -e 's/skip_timeout_commit = ".*"/skip_timeout_commit = false/g' \
-  -e 's/seeds = ".*"/seeds = "3a445bfdbe2d0c8ee82461633aa3af31bc2b4dc0@testnet2-seed-node.lavanet.xyz:26656,e593c7a9ca61f5616119d6beb5bd8ef5dd28d62d@testnet2-seed-node2.lavanet.xyz:26656"/g' \
-  $HOME/.lava/config/config.toml
-
-sed -i -e 's/broadcast-mode = ".*"/broadcast-mode = "sync"/g' $HOME/.lava/config/config.toml
+  -e 's|^pruning *=.*|pruning = "custom"|' \
+  -e 's|^pruning-keep-recent *=.*|pruning-keep-recent = "100"|' \
+  -e 's|^pruning-interval *=.*|pruning-interval = "17"|' \
+  $HOME/.lava/config/app.toml
 
 ### Create service
 sudo tee /etc/systemd/system/lavad.service > /dev/null << EOF
@@ -85,10 +72,7 @@ EOF
 ### Downoload snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
-
-lavad tendermint unsafe-reset-all --home $HOME/.lava --keep-addr-book 
-curl https://snapshots.aknodes.net/snapshots/lava/snapshot-lava.AKNodes.lz4 | lz4 -dc - | tar -xf - -C $HOME/.lava
-
+curl "https://snapshots-testnet.nodejumper.io/lava-testnet/lava-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.lava"
 
 ### Start service and run node
 echo ""
