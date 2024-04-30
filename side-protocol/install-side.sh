@@ -27,7 +27,7 @@ make install
 
 sided config chain-id side-testnet-3
 sided config keyring-backend test
-sided config node tcp://localhost:26657
+sided config node tcp://localhost:26357
 source $HOME/.bash_profile
 
 sided init "$NODE_MONIKER" --chain-id side-testnet-3
