@@ -13,7 +13,7 @@ read -r NODE_MONIKER
 ### Install Dependencies
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/dependencies.sh)
 
-### Bulding binaries
+### Building binaries
 echo ""
 printColor blue "[4/6] Building binaries"
 
@@ -36,15 +36,14 @@ lavad config chain-id $CHAIN_ID
 lavad init "$NODE_MONIKER" --chain-id $CHAIN_ID
 source $HOME/.bash_profile
 
-### Downoload genesis and addrbook
+### Download genesis and addrbook
 curl -s https://raw.githubusercontent.com/lavanet/lava-config/main/testnet-2/genesis_json/genesis.json -o $HOME/.lava/config/genesis.json
 curl -Ls https://snapshots.aknodes.net/snapshots/lava/addrbook.json -o $HOME/.lava/config/addrbook.json
 
 ### Seed config
 sed -i -e 's|^seeds *=.*|seeds = "3a445bfdbe2d0c8ee82461633aa3af31bc2b4dc0@prod-pnet-seed-node.lavanet.xyz:26656,e593c7a9ca61f5616119d6beb5bd8ef5dd28d62d@prod-pnet-seed-node2.lavanet.xyz:26656,ade4d8bc8cbe014af6ebdf3cb7b1e9ad36f412c0@testnet-seeds.polkachu.com:19956,eb7832932626c1c636d16e0beb49e0e4498fbd5e@lava-testnet-seed.itrocket.net:20656"|' $HOME/.lava/config/config.toml
 
-
-### Minimum gas price,prometheus
+### Minimum gas price, prometheus
 sed -i -e 's|^minimum-gas-prices *=.*|minimum-gas-prices = "0.000001ulava"|' $HOME/.lava/config/app.toml
 
 ### Set pruning
@@ -69,7 +68,7 @@ LimitNOFILE=10000
 WantedBy=multi-user.target
 EOF
 
-### Downoload snapshot
+### Download snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
 curl "https://snapshots-testnet.nodejumper.io/lava-testnet/lava-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.lava"
@@ -89,5 +88,5 @@ printColor blue "Check your logs        >>> journalctl -u lavad -f --no-hostname
 echo ""
 printColor blue "Check synchronization  >>> lavad status | jq | grep \"catching_up\" "
 echo ""
-printColor blue "Enjoy to Unity Nodes   >>> https://t.me/unitynodes "
+printColor blue "Enjoy Unity Nodes      >>> https://t.me/unitynodes "
 printLine
