@@ -34,7 +34,7 @@ make install
 lavad config keyring-backend test
 lavad config chain-id $CHAIN_ID
 lavad init "$NODE_MONIKER" --chain-id $CHAIN_ID
-source .bash_profile
+source $HOME/.bash_profile
 
 ### Downoload genesis and addrbook
 curl -s https://raw.githubusercontent.com/lavanet/lava-config/main/testnet-2/genesis_json/genesis.json -o $HOME/.lava/config/genesis.json
