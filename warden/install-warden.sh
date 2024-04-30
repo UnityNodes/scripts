@@ -20,7 +20,7 @@ printColor blue "[4/6] Building binaries"
 cd $HOME
 rm -rf wardenprotocol
 git clone https://github.com/warden-protocol/wardenprotocol
-cd  wardenprotocol
+cd wardenprotocol
 git checkout v0.3.0
 make install-wardend
 
@@ -38,7 +38,7 @@ curl -L https://snapshots-testnet.nodejumper.io/wardenprotocol-testnet/addrbook.
 ### Seed config
 sed -i -e 's|^seeds *=.*|seeds = "ddb4d92ab6eba8363bab2f3a0d7fa7a970ae437f@sentry-1.buenavista.wardenprotocol.org:26656,c717995fd56dcf0056ed835e489788af4ffd8fe8@sentry-2.buenavista.wardenprotocol.org:26656,e1c61de5d437f35a715ac94b88ec62c482edc166@sentry-3.buenavista.wardenprotocol.org:26656"|' $HOME/.warden/config/config.toml
 
-### Minimum gas price, prometheus
+### Minimum gas price
 sed -i -e 's|^minimum-gas-prices *=.*|minimum-gas-prices = "0.01uward"|' $HOME/.warden/config/app.toml
 
 ### Set pruning
