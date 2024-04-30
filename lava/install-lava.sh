@@ -4,7 +4,7 @@
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 clear
-printLogo
+logo
 
 echo -e "\e[30;47m Please enter the node moniker:\e[0m"
 echo -en ">>> "
