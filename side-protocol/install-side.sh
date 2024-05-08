@@ -20,24 +20,26 @@ printColor blue "[4/6] Building binaries"
 
 cd $HOME
 rm -rf sidechain
-git clone https://github.com/sideprotocol/sidechain.git
-cd sidechain
-git checkout v0.7.0-rc2
+git clone https://github.com/sideprotocol/side.git
+cd side
+git checkout v0.8.1
 make install
 
-sided config chain-id side-testnet-3
-sided config keyring-backend test
-sided config node tcp://localhost:26357
+sided config node tcp://localhost:26657
+sided config keyring-backend os
+sided config chain-id S2-testnet-2
 source $HOME/.bash_profile
 
-sided init "$NODE_MONIKER" --chain-id side-testnet-3
+sided init "$NODE_MONIKER" --chain-id S2-testnet-2
 
 ### Download genesis and addrbook
-curl -L https://snapshots-testnet.nodejumper.io/side-testnet/genesis.json > $HOME/.side/config/genesis.json
-curl -L https://snapshots-testnet.nodejumper.io/side-testnet/addrbook.json > $HOME/.side/config/addrbook.json
+wget -O $HOME/.side/config/genesis.json https://testnet-files.itrocket.net/side/genesis.json
+wget -O $HOME/.side/config/addrbook.json https://testnet-files.itrocket.net/side/addrbook.json
 
-### Seed config
-sed -i -e 's|^seeds *=.*|seeds = "6decdc5565bf5232cdf5597a7784bfe828c32277@158.220.126.137:11656,e9ee4fb923d5aab89207df36ce660ff1b882fc72@136.243.33.177:21656,9c14080752bdfa33f4624f83cd155e2d3976e303@side-testnet-seed.itrocket.net:45656"|' $HOME/.side/config/config.toml
+### Seed,Peers config
+SEEDS="9c14080752bdfa33f4624f83cd155e2d3976e303@side-testnet-seed.itrocket.net:45656"
+PEERS="bbbf623474e377664673bde3256fc35a36ba0df1@side-testnet-peer.itrocket.net:45656,3003f4290ea8e3f5674e5d5f687ef8cd4b558036@152.228.208.164:26656,85a16af0aa674b9d1c17c3f2f3a83f28f468174d@167.235.242.236:26656,541c500114bc5516c677f6a79a5bdfec13062e91@37.27.59.176:17456,bf6869c7192e8353765398e826e7934071710d68@81.17.100.237:26656,cb17dadfca6b899af4c807ad56a9c1b1d53c5cf9@134.209.179.45:26656,010e9ba253ce06ab589198ff5717c0fd54f3070e@142.132.152.46:32656,251bffe0182432be50f0569ba3aadf84267df145@167.235.178.134:26356,3247baecb8d37c8429530b7fd2efccf12e1bda86@148.251.235.130:21656"
+sed -i -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.side/config/config.toml
 
 ### Minimum gas price
 sed -i -e 's|^minimum-gas-prices *=.*|minimum-gas-prices = "0.005uside"|' $HOME/.side/config/app.toml
@@ -46,7 +48,7 @@ sed -i -e 's|^minimum-gas-prices *=.*|minimum-gas-prices = "0.005uside"|' $HOME/
 sed -i \
   -e 's|^pruning *=.*|pruning = "custom"|' \
   -e 's|^pruning-keep-recent *=.*|pruning-keep-recent = "100"|' \
-  -e 's|^pruning-interval *=.*|pruning-interval = "17"|' \
+  -e 's|^pruning-interval *=.*|pruning-interval = "50"|' \
   $HOME/.side/config/app.toml
 
 ### Create service
@@ -67,7 +69,7 @@ EOF
 ### Download snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
-curl "https://snapshots-testnet.nodejumper.io/side-testnet/side-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.side"
+curl https://testnet-files.itrocket.net/side/snap_side.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.side
 
 ### Start service and run node
 echo ""
@@ -80,7 +82,7 @@ sudo systemctl start sided.service
 ### Useful commands
 echo ""
 printLine
-printColor blue "Check your logs        >>> journalctl -u sided -f --no-hostname -o cat "
+printColor blue "Check your logs        >>> journalctl -u sided -f -o cat "
 echo ""
 printColor blue "Check synchronization  >>> sided status | jq | grep \"catching_up\" "
 echo ""
