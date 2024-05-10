@@ -11,6 +11,7 @@ if [ "$EUID" -ne 0 ]; then
     error_exit "This script requires administrator rights. Run it with sudo privileges."
 fi
 
+clear
 anima
 logo
 
