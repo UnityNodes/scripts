@@ -24,3 +24,13 @@ Video instruction - https://youtu.be/Nnuj5t5HdLU
 bash <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/nulink/autoinstall-en.sh)
 ```
 
+<h1>Delete node<h6>
+
+```
+rm -rf $HOME/nulink
+rm -rf $HOME/geth-linux-amd64-1.10.23-d901d853/
+rm -rf $HOME/geth-linux-amd64-1.10.23-d901d853tar.gz
+rm -rf /etc/apt/keyrings
+docker kill ursula
+docker rm ursula
+```
