@@ -21,6 +21,6 @@ Video instruction - https://youtu.be/Nnuj5t5HdLU
 
 
 ```
-bash <(curl -s https://raw.githubusercontent.com/CryptoManUA/nulink/main/autoinstall-en.sh)
+bash <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/nulink/autoinstall-en.sh)
 ```
 
