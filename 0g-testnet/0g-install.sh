@@ -79,7 +79,6 @@ sudo systemctl start 0gchaind.service
 echo ""
 printLine
 printColor blue "Check your logs        >>> journalctl -u 0gchaind -f -o cat "
-echo ""
 printColor blue "Check synchronization  >>> 0gchaind status | jq | grep \"catching_up\" "
 echo ""
 printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com"
