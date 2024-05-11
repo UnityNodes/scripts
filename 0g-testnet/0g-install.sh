@@ -19,9 +19,9 @@ printColor blue "[4/6] Building binaries"
 
 cd $HOME
 rm -rf $HOME/.0gchain
-git clone https://github.com/0glabs/0g-chain.git
-cd 0gchain
-git checkout v0.1.0
+git clone -b v0.1.0 https://github.com/0glabs/0g-chain.git
+./0g-chain/networks/testnet/install.sh
+source .bash_profile
 
 0gchaind config chain-id zgtendermint_16600-1
 0gchaind config keyring-backend test
