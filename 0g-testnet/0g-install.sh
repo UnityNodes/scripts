@@ -80,7 +80,7 @@ echo ""
 printLine
 printColor blue "Check your logs        >>> journalctl -u 0gchaind -f -o cat "
 printColor blue "Check synchronization  >>> 0gchaind status | jq | grep \"catching_up\" "
-echo ""
+printLine
 printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com"
 printColor blue "Our service            >>> https://service.unitynodes.com"
 printColor blue "Our blog               >>> https://medium.com/@unitynodes"
