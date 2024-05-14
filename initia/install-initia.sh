@@ -26,7 +26,7 @@ make install
 
 initiad config node tcp://localhost:26657
 initiad config keyring-backend os
-initiad config chain-id cataclysm-1
+initiad config chain-id initiation-1
 source $HOME/.bash_profile
 
 initiad init "$NODE_MONIKER" --chain-id=initiation-1
