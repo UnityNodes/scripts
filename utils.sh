@@ -80,8 +80,6 @@ function anima() {
 #Chain-id
 wardenchain=buenavista-1
 lavachain=lava-testnet-2
-sidechain=side-testnet-3
-dymensionchain=
-cascadiachain=
-zetachain=
-ogchain=zgtendermint_9000-1
+sidechain=S2-testnet-2
+0gchain=zgtendermint_16600-1
+mantrachain=mantra-hongbai-1
