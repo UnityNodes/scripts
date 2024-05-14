@@ -81,12 +81,14 @@ function anima() {
 wardenchain=buenavista-1
 lavachain=lava-testnet-2
 sidechain=S2-testnet-2
-0gchain=zgtendermint_16600-1
+ogchain=zgtendermint_16600-1
 mantrachain=mantra-hongbai-1
+initchain=initiation-1
 
 #Tokens
 wardentoken=uward
-0gtoken=ua0gi
+ogtoken=ua0gi
 sidetoken=uside
 mantratoken=uom
 lavatoken=ulava
+initiatoken=uinit
