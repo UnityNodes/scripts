@@ -83,3 +83,10 @@ lavachain=lava-testnet-2
 sidechain=S2-testnet-2
 0gchain=zgtendermint_16600-1
 mantrachain=mantra-hongbai-1
+
+#Tokens
+wardentoken=uward
+0gtoken=ua0gi
+sidetoken=uside
+mantratoken=uom
+lavatoken=ulava
