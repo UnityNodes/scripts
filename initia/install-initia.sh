@@ -73,7 +73,7 @@ sudo systemctl enable initiad
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
 initiad tendermint unsafe-reset-all --home $HOME/.initia --keep-addr-book 
-curl https://snapshots.aknodes.net/snapshots/initia/snapshot-initia.AKNodes.lz4 | lz4 -dc - | tar -xf - -C $HOME/.initia
+curl https://snapshots-testnet.nodejumper.io/initia-testnet/initia-testnet_latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.initia
 
 
 ### Start service and run node
