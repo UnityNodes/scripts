@@ -120,8 +120,8 @@ CheckAvailablePorts() {
     done
 
     
-    echo -e "\e[30;47mВсі доступні порти зайняті.\e[0m"
-    echo -e "\e[30;47mВведіть значення нових не зайнятих портів, з переліку доступних:\e[0m"
+    echo -e "\e[30;47mAll available ports are busy.\e[0m"
+    echo -e "\e[30;47mEnter the value of new unoccupied ports from the list of available ones:\e[0m"
     echo -en ">>> "
     read -r customport
 
