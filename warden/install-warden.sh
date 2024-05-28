@@ -10,6 +10,9 @@ echo -e "\e[30;47m Please enter the node moniker:\e[0m"
 echo -en ">>> "
 read -r NODE_MONIKER
 
+## Checking available ports, and replace
+CheckAvailablePorts
+
 ### Install Dependencies
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/dependencies.sh)
 
