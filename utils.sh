@@ -102,31 +102,35 @@ port38="38658 38657 38060 38656 38660 29890 29891 38317 28545 28546 38065"
 port39="39658 39657 39060 39656 39660 29990 29991 39317 28545 28546 39065"
 
 CheckAvailablePorts() {
-  
+    
     for port in $standard_ports; do
         if ! lsof -i :$port &>/dev/null; then
-            return
+            return  
         fi
     done
 
-  
+   
     for i in {27..39}; do
         eval "ports=\$port$i"
         for port in $ports; do
             if ! lsof -i :$port &>/dev/null; then
-                return
+                echo -e "\e[30;47mStandard ports are occupied, please enter a new available port from the list (from 27 to 39):\e[0m"
+                echo -e "Available ports: $ports"
+                echo -en ">>> "
+                read -r customport
+                if [[ $customport =~ ^[0-9]+$ ]]; then
+                    sed -i.bak -e "s%:26658%:${customport}658%; s%:26657%:${customport}657%; s%:6060%:${customport}060%; s%:26656%:${customport}656%; s%:26660%:${customport}660%" "$HOME/.$nodefolder/config/config.toml" && \
+                    sed -i.bak -e "s%:9090%:${customport}090%; s%:9091%:${customport}091%; s%:1317%:${customport}317%; s%:8545%:${customport}545%; s%:8546%:${customport}546%; s%:6065%:${customport}065%" "$HOME/.$nodefolder/config/app.toml" && \
+                    sed -i.bak -e "s%:26657%:${customport}657%" "$HOME/.$nodefolder/config/client.toml"
+                    return
+                else
+                    echo "Invalid port value. Please enter a valid port number."
+                fi
             fi
         done
     done
 
     
-    echo -e "\e[30;47mAll available ports are busy.\e[0m"
-    echo -e "\e[30;47mEnter the value of new unoccupied ports from the list of available ones:\e[0m"
-    echo -en ">>> "
-    read -r customport
-
-   
-    sed -i.bak -e "s%:26658%:${customport}658%; s%:26657%:${customport}657%; s%:6060%:${customport}060%; s%:26656%:${customport}656%; s%:26660%:${customport}660%" "$HOME/.$nodefolder/config/config.toml" && \
-    sed -i.bak -e "s%:9090%:${customport}090%; s%:9091%:${customport}091%; s%:1317%:${customport}317%; s%:8545%:${customport}545%; s%:8546%:${customport}546%; s%:6065%:${customport}065%" "$HOME/.$nodefolder/config/app.toml" && \
-    sed -i.bak -e "s%:26657%:${customport}657%" "$HOME/.$nodefolder/config/client.toml"
+    echo -e "\e[30;47mAll available ports are busy. Node will be installed without changes.\e[0m"
 }
+
