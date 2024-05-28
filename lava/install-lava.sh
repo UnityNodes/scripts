@@ -20,7 +20,7 @@ printColor blue "[4/6] Building binaries"
 CHAIN_ID="lava-testnet-2"
 CHAIN_DENOM="ulava"
 BINARY_NAME="lavad"
-BINARY_VERSION_TAG="v1.2.0"
+BINARY_VERSION_TAG="v2.0.0"
 
 export LAVA_BINARY=lavad
 
@@ -28,7 +28,7 @@ cd || return
 rm -rf lava
 git clone https://github.com/lavanet/lava
 cd lava || return
-git checkout v1.2.0
+git checkout v2.0.0
 make install
 
 lavad config keyring-backend test
