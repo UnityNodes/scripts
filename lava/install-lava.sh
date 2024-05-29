@@ -84,7 +84,7 @@ sudo systemctl start lavad
 ### Useful commands
 echo ""
 printLine
-printColor blue "Check your logs        >>> journalctl -u lavad -f --no-hostname -o cat "
+printColor blue "Check your logs        >>> journalctl -u lavad -f -o cat "
 echo ""
 printColor blue "Check synchronization  >>> lavad status | jq | grep \"catching_up\" "
 echo ""
