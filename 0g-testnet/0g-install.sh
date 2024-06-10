@@ -32,7 +32,7 @@ source $HOME/.bash_profile
 
 ### Download genesis and addrbook
 wget https://github.com/0glabs/0g-chain/releases/download/v0.1.0/genesis.json -O $HOME/.0gchain/config/genesis.json
-curl -s https://snapshots-testnet.nodejumper.io/0g-testnet/addrbook.json > $HOME/.0gchain/config/addrbook.json
+curl -s https://snapshots-testnet.unitynodes.com/0gchain-testnet/addrbook.json > $HOME/.0gchain/config/addrbook.json
 
 ### Minimum gas price
 sed -i "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0ua0gi\"/" $HOME/.0gchain/config/app.toml
@@ -48,7 +48,7 @@ sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.0gchain/config/app.toml
 
 # Download snapshot
-curl "https://snapshots-testnet.nodejumper.io/0g-testnet/0g-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.0gchain"
+curl "https://snapshots-testnet.unitynodes.com/0gchain-testnet/0gchain-testnet-latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.0gchain"
 
 ### Create service
 sudo tee /etc/systemd/system/0gchaind.service > /dev/null << EOF
