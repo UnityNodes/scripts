@@ -31,9 +31,8 @@ source $HOME/.bash_profile
 
 wardend init "$NODE_MONIKER" --chain-id buenavista-1
 
-### Download genesis and addrbook
-curl -L https://snapshots-testnet.nodejumper.io/wardenprotocol-testnet/genesis.json > $HOME/.warden/config/genesis.json
-curl -L https://snapshots-testnet.nodejumper.io/wardenprotocol-testnet/addrbook.json > $HOME/.warden/config/addrbook.json
+### Download addrbook
+curl -L https://snapshots-testnet.unitynodes.com/warden-testnet/addrbook.json > $HOME/.warden/config/addrbook.json
 
 ### Seed config
 sed -i -e 's|^seeds *=.*|seeds = "ddb4d92ab6eba8363bab2f3a0d7fa7a970ae437f@sentry-1.buenavista.wardenprotocol.org:26656,c717995fd56dcf0056ed835e489788af4ffd8fe8@sentry-2.buenavista.wardenprotocol.org:26656,e1c61de5d437f35a715ac94b88ec62c482edc166@sentry-3.buenavista.wardenprotocol.org:26656"|' $HOME/.warden/config/config.toml
@@ -66,7 +65,7 @@ EOF
 ### Download snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
-curl "https://snapshots-testnet.nodejumper.io/wardenprotocol-testnet/wardenprotocol-testnet_latest.tar.lz4" | lz4 -dc - | tar -xf - -C "$HOME/.warden"
+curl "https://snapshots-testnet.unitynodes.com/warden-testnet/warden-testnet-latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.warden"
 
 ### Start service and run node
 echo ""
