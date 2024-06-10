@@ -32,9 +32,8 @@ source $HOME/.bash_profile
 
 sided init "$NODE_MONIKER" --chain-id S2-testnet-2
 
-### Download genesis and addrbook
-wget -O $HOME/.side/config/genesis.json https://testnet-files.itrocket.net/side/genesis.json
-wget -O $HOME/.side/config/addrbook.json https://testnet-files.itrocket.net/side/addrbook.json
+### Download addrbook
+curl https://snapshots-testnet.unitynodes.com/side-testnet/addrbook.json | lz4 -dc - | tar -xf - -C $HOME/.side
 
 ### Seed,Peers config
 SEEDS="9c14080752bdfa33f4624f83cd155e2d3976e303@side-testnet-seed.itrocket.net:45656"
@@ -69,7 +68,7 @@ EOF
 ### Download snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
-curl https://testnet-files.itrocket.net/side/snap_side.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.side
+curl https://snapshots-testnet.unitynodes.com/side-testnet/side-testnet-latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.side
 
 ### Start service and run node
 echo ""
