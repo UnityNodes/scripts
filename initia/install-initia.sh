@@ -32,6 +32,7 @@ source $HOME/.bash_profile
 initiad init "$NODE_MONIKER" --chain-id=initiation-1
 
 ### Download addrbook
+curl -L https://snapshots-testnet.nodejumper.io/initia-testnet/genesis.json > $HOME/.initia/config/genesis.json
 curl -s https://snapshots-testnet.unitynodes.com/initia-testnet/addrbook.json > $HOME/.initia/config/addrbook.json
 
 ### Seed,Peers config
