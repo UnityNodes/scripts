@@ -83,5 +83,5 @@ printColor blue "Check your logs        >>> journalctl -u wardend -f --no-hostna
 echo ""
 printColor blue "Check synchronization  >>> wardend status | jq | grep \"catching_up\" "
 echo ""
-printColor blue "Enjoy Unity Nodes      >>> https://t.me/unitynodes "
+printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com/ "
 printLine
