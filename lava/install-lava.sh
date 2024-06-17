@@ -20,7 +20,7 @@ printColor blue "[4/6] Building binaries"
 CHAIN_ID="lava-testnet-2"
 CHAIN_DENOM="ulava"
 BINARY_NAME="lavad"
-BINARY_VERSION_TAG="v2.1.1"
+BINARY_VERSION_TAG="v2.1.3"
 
 export LAVA_BINARY=lavad
 
