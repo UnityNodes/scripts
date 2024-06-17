@@ -33,6 +33,7 @@ source $HOME/.bash_profile
 sided init "$NODE_MONIKER" --chain-id S2-testnet-2
 
 ### Download addrbook
+curl -Ls https://snapshots.aknodes.net/snapshots/side/genesis.json > $HOME/.side/config/genesis.json
 curl https://snapshots-testnet.unitynodes.com/side-testnet/addrbook.json | lz4 -dc - | tar -xf - -C $HOME/.side
 
 ### Seed,Peers config
