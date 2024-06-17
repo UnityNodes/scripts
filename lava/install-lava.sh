@@ -88,5 +88,5 @@ printColor blue "Check your logs        >>> journalctl -u lavad -f -o cat "
 echo ""
 printColor blue "Check synchronization  >>> lavad status | jq | grep \"catching_up\" "
 echo ""
-printColor blue "Enjoy Unity Nodes      >>> https://t.me/unitynodes "
+printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com/ "
 printLine
