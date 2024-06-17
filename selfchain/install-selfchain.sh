@@ -86,6 +86,6 @@ printColor blue "Check your logs        >>> journalctl -u selfchaind -f -o cat "
 printColor blue "Check synchronization  >>> selfchaind status | jq | grep \"catching_up\" "
 printLine
 printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com"
-printColor blue "Our service            >>> https://service.unitynodes.com"
+printColor blue "Our service            >>> https://services.unitynodes.com"
 printColor blue "Our blog               >>> https://medium.com/@unitynodes"
 printLine
