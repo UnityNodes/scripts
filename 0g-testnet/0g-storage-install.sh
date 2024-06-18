@@ -45,7 +45,7 @@ rustup target add wasm32-unknown-unknown --toolchain nightly
 
 printColor blue "Install 0G Storage"
 cd $HOME
-git clone -b v0.3.0 https://github.com/0glabs/0g-storage-node.git
+git clone -b v0.3.1 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
 git submodule update --init
 cargo build --release
@@ -74,7 +74,9 @@ esac
 
 printColor blue "Node Configuration"
 echo ""
-echo 'export BLOCKCHAIN_RPC_ENDPOINT="https://evm-rpc.0gchain-testnet.unitynodes.com"' >> ~/.bash_profile
+echo 'export BLOCKCHAIN_RPC_ENDPOINT="http://evm-rpc.0gchain-testnet.unitynodes.com:8545"' >> ~/.bash_profile
+config_file="/root/0g-storage-node/run/config.toml"
+network_height=$(curl -s https://rpc.0gchain-testnet.unitynodes.com/status | jq -r '.result.sync_info.latest_block_height')
 source ~/.bash_profile
 sed -i '
 s|# network_dir = "network"|network_dir = "network"|
@@ -88,6 +90,7 @@ s|^blockchain_rpc_endpoint = \".*|blockchain_rpc_endpoint = "'"$BLOCKCHAIN_RPC_E
 ' $HOME/0g-storage-node/run/config.toml
 read -p "Your Private KEY: " PRIVATE_KEY
 sed -i 's|^miner_key = ""|miner_key = "'"$PRIVATE_KEY"'"|' $HOME/0g-storage-node/run/config.toml
+sed -i "s/^log_sync_start_block_number = .*/log_sync_start_block_number = $network_height/" $config_file
 
 
 printColor blue "Create service file"
