@@ -31,7 +31,7 @@ source $HOME/.bash_profile
 0gchaind init "$NODE_MONIKER" --chain-id zgtendermint_16600-1
 
 ### Download genesis and addrbook
-wget https://github.com/0glabs/0g-chain/releases/download/v0.1.0/genesis.json -O $HOME/.0gchain/config/genesis.json
+wget https://snapshots-testnet.unitynodes.com/0gchain-testnet/genesis.json -O $HOME/.0gchain/config/genesis.json
 curl -s https://snapshots-testnet.unitynodes.com/0gchain-testnet/addrbook.json > $HOME/.0gchain/config/addrbook.json
 
 ### Minimum gas price
