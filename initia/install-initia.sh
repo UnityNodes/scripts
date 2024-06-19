@@ -31,9 +31,9 @@ source $HOME/.bash_profile
 
 initiad init "$NODE_MONIKER" --chain-id=initiation-1
 
-### Download addrbook
-curl -Ls https://snapshots.tienthuattoan.com/testnet/initia/genesis.json > $HOME/.initia/config/genesis.json
-curl -Ls https://snapshots.tienthuattoan.com/testnet/initia/addrbook.json > $HOME/.initia/config/addrbook.json
+### Download genesis, addrbook files
+curl -Ls https://snapshots-testnet.unitynodes.com/initia-testnet/genesis.json > $HOME/.initia/config/genesis.json
+curl -Ls https://snapshots-testnet.unitynodes.com/initia-testnet/addrbook.json > $HOME/.initia/config/addrbook.json
 
 ### Seed,Peers config
 sed -i -e 's|^seeds *=.*|seeds = "2eaa272622d1ba6796100ab39f58c75d458b9dbc@34.142.181.82:26656,c28827cb96c14c905b127b92065a3fb4cd77d7f6@testnet-seeds.whispernode.com:25756,cd69bcb00a6ecc1ba2b4a3465de4d4dd3e0a3db1@initia-testnet-seed.itrocket.net:51656,093e1b89a498b6a8760ad2188fbda30a05e4f300@35.240.207.217:26656,2c729d33d22d8cdae6658bed97b3097241ca586c@195.14.6.129:26019"|' $HOME/.initia/config/config.toml
