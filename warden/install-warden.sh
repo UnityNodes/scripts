@@ -32,7 +32,7 @@ source $HOME/.bash_profile
 wardend init "$NODE_MONIKER" --chain-id buenavista-1
 
 ### Download addrbook
-curl -L https://snapshots-testnet.nodejumper.io/wardenprotocol-testnet/genesis.json > $HOME/.warden/config/genesis.json
+curl -L https://snapshots-testnet.unitynodes.com/warden-testnet/genesis.json > $HOME/.warden/config/genesis.json
 curl -L https://snapshots-testnet.unitynodes.com/warden-testnet/addrbook.json > $HOME/.warden/config/addrbook.json
 
 ### Seed config
