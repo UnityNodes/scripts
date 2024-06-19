@@ -33,8 +33,8 @@ source $HOME/.bash_profile
 nibid init "$NODE_MONIKER" --chain-id=cataclysm-1
 
 ### Download genesis and addrbook
-curl -Ls https://snapshots.aknodes.net/snapshots/nibiru-mainnet/genesis.json > $HOME/.nibid/config/genesis.json
-curl -Ls https://snapshots.aknodes.net/snapshots/nibiru-mainnet/addrbook.json > $HOME/.nibid/config/addrbook.json
+curl -Ls https://snapshots-mainnet.unitynodes.com/nibiru-mainnet/genesis.json > $HOME/.nibid/config/genesis.json
+curl -Ls https://snapshots-mainnet.unitynodes.com/nibiru-mainnet/addrbook.json > $HOME/.nibid/config/addrbook.json
 
 ### Seed,Peers config
 PEERS=2def9fa7dfe945cdcde36e8086683c575e57fdb2@5.161.69.253:26656,9915b1353daa966c8e2cc9be4978710c9fb45eef@138.201.188.126:31256,ab2ae706ea5b5df1b306608b258c2232516bdc02@51.195.104.64:5656,063df1b08744f8150f2b00913a0cec9fcbd47ac8@51.89.173.96:55356,75ef1a4193d19788049a2a04115ed42c46f785f0@35.233.106.156:26656
