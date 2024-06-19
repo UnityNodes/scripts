@@ -32,8 +32,8 @@ source $HOME/.bash_profile
 selfchaind init "$NODE_MONIKER" --chain-id self-dev-1
 
 ### Download genesis and addrbook
-curl -Ls https://raw.githubusercontent.com/hotcrosscom/selfchain-genesis/main/networks/devnet/genesis.json > $HOME/.selfchain/config/genesis.json
-curl -Ls https://snapshots.indonode.net/selfchain/addrbook.json > $HOME/.selfchain/config/addrbook.json
+curl -Ls https://snapshots-mainnet.unitynodes.com/selfchain-mainnet/genesis.json > $HOME/.selfchain/config/genesis.json
+curl -Ls https://snapshots-mainnet.unitynodes.com/selfchain-mainnet/addrbook.json > $HOME/.selfchain/config/addrbook.json
 
 ### Seed config
 PEERS="$(curl -sS https://rpc.selfchain-t.indonode.net/net_info | jq -r '.result.peers[] | "(.node_info.id)@(.remote_ip):(.node_info.listen_addr)"' | awk -F ':' '{print $1":"$(NF)}' | sed -z 's|
