@@ -37,7 +37,7 @@ lavad init "$NODE_MONIKER" --chain-id $CHAIN_ID
 source $HOME/.bash_profile
 
 ### Download addrbook
-curl -L https://snapshots-testnet.nodejumper.io/lava-testnet/genesis.json > $HOME/.lava/config/genesis.json
+curl -L https://snapshots-testnet.unitynodes.com/lava-testnet-2/genesis.json > $HOME/.lava/config/genesis.json
 curl -Ls https://snapshots-testnet.unitynodes.com/lava-testnet-2/addrbook.json -o $HOME/.lava/config/addrbook.json
 
 ### Seed config
