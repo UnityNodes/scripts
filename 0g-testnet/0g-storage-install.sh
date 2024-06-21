@@ -5,7 +5,7 @@ source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils
 
 clear
 logo
-printColor blue "Install, updat, package"
+printColor blue "Install, update, package"
 sudo apt update && sudo apt upgrade -y && sleep 1
 sudo apt install curl tar wget clang pkg-config protobuf-compiler libssl-dev jq build-essential protobuf-compiler bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y && sleep 1
 sudo apt -qy upgrade
