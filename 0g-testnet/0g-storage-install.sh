@@ -1,7 +1,8 @@
 #!/bin/bash
 
-source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
+set -e
 
+source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 clear
 logo
@@ -12,39 +13,40 @@ sudo apt -qy upgrade
 
 printColor blue "Remove and install Go" && sleep 1
 sudo rm -rf /usr/local/go
-sudo rm /etc/paths.d/go
-sudo apt-get remove golang-go
-sudo apt-get remove --auto-remove golang-go
+sudo rm /etc/paths.d/go || true
+sudo apt-get remove -y golang-go || true
+sudo apt-get remove --auto-remove -y golang-go || true
 VER="1.22.0"
 wget "https://golang.org/dl/go$VER.linux-amd64.tar.gz"
-sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf "go$VER.linux-amd64.tar.gz"
 rm "go$VER.linux-amd64.tar.gz"
 [ ! -f ~/.bash_profile ] && touch ~/.bash_profile
-echo "export PATH=$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
+echo "export PATH=\$PATH:/usr/local/go/bin:~/go/bin" >> ~/.bash_profile
 source $HOME/.bash_profile
 [ ! -d ~/go/bin ] && mkdir -p ~/go/bin
 
-
 cd $HOME
 
-printColor blue "Install, updat, package"
+printColor blue "Install, update, package"
 sudo apt update && sudo apt upgrade -y
 
 printColor blue "Install rust" && sleep 1
 sudo apt-get update
-sudo apt install build-essential
-sudo apt install --assume-yes git clang curl libssl-dev protobuf-compiler
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+sudo apt install -y build-essential git clang curl libssl-dev protobuf-compiler
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source ~/.cargo/env
 rustup default stable
 rustup update
 rustup update nightly
 rustup target add wasm32-unknown-unknown --toolchain nightly
 
-
 printColor blue "Install 0G Storage"
 cd $HOME
+if [ -d "0g-storage-node" ]; then
+  echo "Directory 0g-storage-node already exists. Please remove it if you want to reinstall."
+  exit 1
+fi
+
 git clone -b v0.3.2 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
 git submodule update --init
@@ -54,23 +56,18 @@ cd $HOME
 
 0gchaind keys unsafe-export-eth-key wallet
 echo ""
-echo ""
-echo ""
-echo ""
 printColor blue "if the node and wallet is created on this server you should see your private key"
 printColor blue "Copy it for further installation"
 printColor blue "if the node and wallet is created on another server, just use it in the subsequent installation"
-echo ""
-echo ""
-echo ""
 echo ""
 
 printColor blue "Node Configuration"
 echo ""
 echo 'export BLOCKCHAIN_RPC_ENDPOINT="http://evm-rpc.0gchain-testnet.unitynodes.com:8545"' >> ~/.bash_profile
-config_file="/root/0g-storage-node/run/config.toml"
-network_height=$(curl -s https://rpc.0gchain-testnet.unitynodes.com/status | jq -r '.result.sync_info.latest_block_height')
 source ~/.bash_profile
+config_file="$HOME/0g-storage-node/run/config.toml"
+network_height=$(curl -s https://rpc.0gchain-testnet.unitynodes.com/status | jq -r '.result.sync_info.latest_block_height')
+
 sed -i '
 s|# network_dir = "network"|network_dir = "network"|
 s|# network_libp2p_port = 1234|network_libp2p_port = 1234|
@@ -80,11 +77,11 @@ s|# db_dir = "db"|db_dir = "db"|
 s|# log_config_file = "log_config"|log_config_file = "log_config"|
 s|# log_directory = "log"|log_directory = "log"|
 s|^blockchain_rpc_endpoint = \".*|blockchain_rpc_endpoint = "'"$BLOCKCHAIN_RPC_ENDPOINT"'"|
-' $HOME/0g-storage-node/run/config.toml
-read -p "Your Private KEY: " PRIVATE_KEY
-sed -i 's|^miner_key = ""|miner_key = "'"$PRIVATE_KEY"'"|' $HOME/0g-storage-node/run/config.toml
-sed -i "s/^log_sync_start_block_number = .*/log_sync_start_block_number = $network_height/" $config_file
+' "$config_file"
 
+read -p "Your Private KEY: " PRIVATE_KEY
+sed -i 's|^miner_key = ""|miner_key = "'"$PRIVATE_KEY"'"|' "$config_file"
+sed -i "s/^log_sync_start_block_number = .*/log_sync_start_block_number = $network_height/" "$config_file"
 
 printColor blue "Create service file"
 
@@ -108,9 +105,9 @@ EOF
 
 printColor blue "Start 0G Storage Node"
 
-sudo systemctl daemon-reload && \
-sudo systemctl enable zgs && \
-sudo systemctl restart zgs && \
+sudo systemctl daemon-reload
+sudo systemctl enable zgs
+sudo systemctl restart zgs
 sudo systemctl status zgs
 
 echo ""
