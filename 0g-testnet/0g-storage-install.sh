@@ -73,6 +73,10 @@ case "$choice" in
     ;;
 esac
 
+if [ -d "0g-storage-node" ] && [ "$(ls -A 0g-storage-node)" ]; then
+  echo "fatal: destination path '0g-storage-node' already exists and is not an empty directory."
+  exit 1
+fi
 
 printColor blue "Node Configuration"
 echo ""
