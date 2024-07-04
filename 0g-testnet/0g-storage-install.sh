@@ -76,13 +76,11 @@ s|# db_dir = "db"|db_dir = "db"|
 s|# log_config_file = "log_config"|log_config_file = "log_config"|
 s|# log_directory = "log"|log_directory = "log"|
 s|^blockchain_rpc_endpoint = \".*|blockchain_rpc_endpoint = "'"$BLOCKCHAIN_RPC_ENDPOINT"'"|
-' "$config_file"
-
+' $HOME/0g-storage-node/run/config.toml
 read -p "Your Private KEY: " PRIVATE_KEY
-sed -i 's|^miner_key = ""|miner_key = "'"$PRIVATE_KEY"'"|' "$config_file"
-sed -i "s/^log_sync_start_block_number = .*/log_sync_start_block_number = $network_height/" "$config_file"
+sed -i 's|^miner_key = ""|miner_key = "'"$PRIVATE_KEY"'"|' $HOME/0g-storage-node/run/config.toml
+sed -i "s/^log_sync_start_block_number = .*/log_sync_start_block_number = $network_height/" $config_file
 
-printColor blue "Create service file"
 
 sudo tee /etc/systemd/system/zgs.service > /dev/null <<EOF
 [Unit]
