@@ -60,7 +60,8 @@ printColor Yellow "if the node and wallet is created on another server, just use
 read -p "Continue installation? (y/n): " choice
 case "$choice" in
   y|Y ) 
-    echo "Continuation..." & sleep 2
+    echo "Continuation..."
+    sleep 2
     ;;
   n|N ) 
     echo "Cancelled."
@@ -71,6 +72,7 @@ case "$choice" in
     exit 1
     ;;
 esac
+
 
 printColor blue "Node Configuration"
 echo ""
