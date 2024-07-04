@@ -53,25 +53,18 @@ sudo cp $HOME/0g-storage-node/target/release/zgs_node /usr/local/bin
 cd $HOME
 
 0gchaind keys unsafe-export-eth-key wallet
-
+echo ""
+echo ""
+echo ""
+echo ""
 printColor blue "if the node and wallet is created on this server you should see your private key"
 printColor blue "Copy it for further installation"
 printColor blue "if the node and wallet is created on another server, just use it in the subsequent installation"
-read -p "Continue installation? (y/n): " choice
-case "$choice" in
-  y|Y ) 
-    echo "Continuation..."
-    sleep 2
-    ;;
-  n|N ) 
-    echo "Cancelled."
-    exit 0
-    ;;
-  * ) 
-    echo "Please enter 'y' or 'n'."
-    exit 1
-    ;;
-esac
+echo ""
+echo ""
+echo ""
+echo ""
+
 
 if [ -d "0g-storage-node" ] && [ "$(ls -A 0g-storage-node)" ]; then
   echo "fatal: destination path '0g-storage-node' already exists and is not an empty directory."
