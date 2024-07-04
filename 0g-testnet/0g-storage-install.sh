@@ -54,7 +54,6 @@ cargo build --release
 sudo cp $HOME/0g-storage-node/target/release/zgs_node /usr/local/bin
 cd $HOME
 
-0gchaind keys unsafe-export-eth-key wallet
 echo ""
 printColor blue "if the node and wallet is created on this server you should see your private key"
 printColor blue "Copy it for further installation"
