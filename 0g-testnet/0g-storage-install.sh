@@ -54,9 +54,9 @@ cd $HOME
 
 0gchaind keys unsafe-export-eth-key wallet
 
-printColor yellow "if the node and wallet is created on this server you should see your private key"
-printColor red "Copy it for further installation"
-printColor yellow "if the node and wallet is created on another server, just use it in the subsequent installation"
+printColor blue "if the node and wallet is created on this server you should see your private key"
+printColor blue "Copy it for further installation"
+printColor blue "if the node and wallet is created on another server, just use it in the subsequent installation"
 read -p "Continue installation? (y/n): " choice
 case "$choice" in
   y|Y ) 
