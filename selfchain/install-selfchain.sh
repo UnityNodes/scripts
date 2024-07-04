@@ -19,31 +19,30 @@ printColor blue "[4/6] Building binaries"
 
 cd $HOME
 rm -rf selfchain
-git clone https://github.com/chain4energy/c4e-chain.git selfchain
+git clone https://github.com/hotcrosscom/Self-Chain-Releases.git selfchain
 cd selfchain
-git checkout 0.2.2
-make install
+git checkout mainnet-v1.0.1
 source .bash_profile
 
-selfchaind config chain-id self-dev-1
+selfchaind config chain-id self-1
 selfchaind config keyring-backend file
 source $HOME/.bash_profile
 
-selfchaind init "$NODE_MONIKER" --chain-id self-dev-1
+selfchaind init "$NODE_MONIKER" --chain-id self-1
 
 ### Download genesis and addrbook
 curl -Ls https://snapshots-mainnet.unitynodes.com/selfchain-mainnet/genesis.json > $HOME/.selfchain/config/genesis.json
 curl -Ls https://snapshots-mainnet.unitynodes.com/selfchain-mainnet/addrbook.json > $HOME/.selfchain/config/addrbook.json
 
 ### Seed config
-PEERS="$(curl -sS https://rpc.selfchain-t.indonode.net/net_info | jq -r '.result.peers[] | "(.node_info.id)@(.remote_ip):(.node_info.listen_addr)"' | awk -F ':' '{print $1":"$(NF)}' | sed -z 's|
+PEERS="$(curl -sS https://rpc.selfchain-mainnet.unitynodes.com/net_info | jq -r '.result.peers[] | "(.node_info.id)@(.remote_ip):(.node_info.listen_addr)"' | awk -F ':' '{print $1":"$(NF)}' | sed -z 's|
 |,|g;s|.$||')"
 sed -i -e "s|^persistent_peers *=.*|persistent_peers = "$PEERS"|" $HOME/.selfchain/config/config.toml
 
 ### Set pruning
 PRUNING="custom"
 PRUNING_KEEP_RECENT="100"
-PRUNING_INTERVAL="19"
+PRUNING_INTERVAL="10"
 
 sed -i -e "s/^pruning *=.*/pruning = "$PRUNING"/" $HOME/.selfchain/config/app.toml
 sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = "$PRUNING_KEEP_RECENT"/" $HOME/.selfchain/config/app.toml
@@ -68,8 +67,7 @@ WantedBy=multi-user.target
 EOF
 
 # Download Latest Snapshot
-curl -L undefined | tar -Ilz4 -xf - -C $HOME/.selfchain
-[[ -f $HOME/.selfchain/data/upgrade-info.json ]] && cp $HOME/.selfchain/data/upgrade-info.json $HOME/.selfchain/cosmovisor/genesis/upgrade-info.json
+curl https://snapshots-mainnet.unitynodes.com/selfchain-mainnet/selfchain-mainnet-latest.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.selfchain
 
 ### Start service and run node
 echo ""
