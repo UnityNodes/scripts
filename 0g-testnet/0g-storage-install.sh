@@ -62,7 +62,7 @@ echo ""
 
 printColor blue "Node Configuration"
 echo ""
-echo 'export BLOCKCHAIN_RPC_ENDPOINT="http://evm-rpc.0gchain-testnet.unitynodes.com:8545"' >> ~/.bash_profile
+echo 'export BLOCKCHAIN_RPC_ENDPOINT="https://evm-rpc.0gchain-testnet.unitynodes.com:8545"' >> ~/.bash_profile
 source ~/.bash_profile
 config_file="$HOME/0g-storage-node/run/config.toml"
 network_height=$(curl -s https://rpc.0gchain-testnet.unitynodes.com/status | jq -r '.result.sync_info.latest_block_height')
