@@ -9,6 +9,7 @@ logo
 printColor blue "Install, update, package"
 sudo apt update && sudo apt upgrade -y && sleep 1
 sudo apt install curl tar wget clang pkg-config protobuf-compiler libssl-dev jq build-essential protobuf-compiler bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y && sleep 1
+sudo apt jq -y
 sudo apt -qy upgrade
 
 printColor blue "Remove and install Go" && sleep 1
