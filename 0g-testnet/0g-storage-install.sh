@@ -10,7 +10,7 @@ printColor blue "Install, update, package"
 sudo apt update && sudo apt upgrade -y && sleep 1
 sudo apt install curl tar wget clang pkg-config protobuf-compiler libssl-dev jq build-essential protobuf-compiler bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y && sleep 1
 sudo apt jq -y
-sudo apt -qy upgrade
+sudo apt -qy upgrade -y
 
 printColor blue "Remove and install Go" && sleep 1
 sudo rm -rf /usr/local/go
@@ -32,14 +32,14 @@ printColor blue "Install, update, package"
 sudo apt update && sudo apt upgrade -y
 
 printColor blue "Install rust" && sleep 1
-sudo apt-get update
-sudo apt install -y build-essential git clang curl libssl-dev protobuf-compiler
+sudo apt-get update -y
+sudo apt install -y build-essential git clang curl libssl-dev protobuf-compiler -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source ~/.cargo/env
-rustup default stable
-rustup update
-rustup update nightly
-rustup target add wasm32-unknown-unknown --toolchain nightly
+rustup default stable -y
+rustup update -y
+rustup update nightly -y
+rustup target add wasm32-unknown-unknown --toolchain nightly -y
 
 printColor blue "Install 0G Storage"
 cd $HOME
@@ -54,12 +54,6 @@ git submodule update --init
 cargo build --release
 sudo cp $HOME/0g-storage-node/target/release/zgs_node /usr/local/bin
 cd $HOME
-
-echo ""
-printColor blue "if the node and wallet is created on this server you should see your private key"
-printColor blue "Copy it for further installation"
-printColor blue "if the node and wallet is created on another server, just use it in the subsequent installation"
-echo ""
 
 printColor blue "Node Configuration"
 echo ""
@@ -78,8 +72,6 @@ s|# log_config_file = "log_config"|log_config_file = "log_config"|
 s|# log_directory = "log"|log_directory = "log"|
 s|^blockchain_rpc_endpoint = \".*|blockchain_rpc_endpoint = "'"$BLOCKCHAIN_RPC_ENDPOINT"'"|
 ' $HOME/0g-storage-node/run/config.toml
-read -p "Your Private KEY: " PRIVATE_KEY
-sed -i 's|^miner_key = ""|miner_key = "'"$PRIVATE_KEY"'"|' $HOME/0g-storage-node/run/config.toml
 sed -i "s/^log_sync_start_block_number = .*/log_sync_start_block_number = $network_height/" $config_file
 
 
