@@ -36,10 +36,10 @@ sudo apt-get update -y
 sudo apt install -y build-essential git clang curl libssl-dev protobuf-compiler -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 source ~/.cargo/env
-rustup default stable -y
-rustup update -y
-rustup update nightly -y
-rustup target add wasm32-unknown-unknown --toolchain nightly -y
+rustup default stable
+rustup update
+rustup update nightly
+rustup target add wasm32-unknown-unknown --toolchain nightly
 
 printColor blue "Install 0G Storage"
 cd $HOME
