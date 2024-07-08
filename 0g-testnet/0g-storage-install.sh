@@ -103,6 +103,7 @@ sudo systemctl status zgs
 echo ""
 printLine
 printColor blue "Check your logs        >>> tail -f 0g-storage-node/run/log/* "
+printColor blue "Check node version     >>> $HOME/0g-storage-node/target/release/zgs_node --version "
 printLine
 printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com"
 printColor blue "Our service            >>> https://services.unitynodes.com"
