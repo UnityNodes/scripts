@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Завантажуємо корисні функції з URL
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 clear
@@ -30,10 +31,9 @@ printColor blue "Install, update, package"
 sudo apt update && sudo apt upgrade -y
 
 printColor blue "Install rust" && sleep 1
-sudo apt-get update -y
-sudo apt install -y build-essential git clang curl libssl-dev protobuf-compiler -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-source ~/.cargo/env
+source $HOME/.cargo/env
+
 rustup default stable
 rustup update
 rustup update nightly
