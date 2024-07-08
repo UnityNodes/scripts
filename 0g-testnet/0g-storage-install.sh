@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -e
-
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 clear
