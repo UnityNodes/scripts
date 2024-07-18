@@ -46,7 +46,7 @@ if [ -d "0g-storage-node" ]; then
   exit 1
 fi
 
-git clone -b v0.3.0 https://github.com/0glabs/0g-storage-node.git
+git clone -b v0.3.4 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
 git submodule update --init
 cargo build --release
