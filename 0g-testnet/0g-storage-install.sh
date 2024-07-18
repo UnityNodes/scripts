@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Завантажуємо корисні функції з URL
+# Basic functions from URL
 source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/utils.sh)
 
 clear
