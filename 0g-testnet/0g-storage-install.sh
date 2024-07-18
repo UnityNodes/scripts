@@ -63,6 +63,7 @@ network_height=$(curl -s https://rpc.0gchain-testnet.unitynodes.com/status | jq 
 
 sed -i '
 s|# network_dir = "network"|network_dir = "network"|
+s|# rpc_enabled = true|rpc_enabled = true|
 s|# network_listen_address = "0.0.0.0"|network_listen_address = "'"$NETWORK_LISTEN_ADDRESS"'"|
 s|# network_libp2p_port = 1234|network_libp2p_port = 1234|
 s|# network_discovery_port = 1234|network_discovery_port = 1234|
