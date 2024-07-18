@@ -105,9 +105,9 @@ sudo systemctl status zgs
 
 echo ""
 printLine
-printColor blue "Check your logs        >>> tail -f ~/0g-storage-node/run/log/zgs.log.$(TZ=UTC date +%Y-%m-%d) "
-printColor blue "Check your SyncHeight  >>> curl -X POST http://localhost:5678 -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}' | jq
-printColor blue "Check node version     >>> $HOME/0g-storage-node/target/release/zgs_node --version "
+printColor blue "Check your Logs        >>> tail -f ~/0g-storage-node/run/log/zgs.log.$(TZ=UTC date +%Y-%m-%d) "
+printColor blue "Check your SyncHeight  >>> curl -X POST http://localhost:5678 -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}' | jq "
+printColor blue "Check node Version     >>> $HOME/0g-storage-node/target/release/zgs_node --version "
 printLine
 printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com"
 printColor blue "Our service            >>> https://services.unitynodes.com"
