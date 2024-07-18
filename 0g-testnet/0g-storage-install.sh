@@ -71,7 +71,7 @@ s|# log_contract_address = ""|log_contract_address = "0x8873cc79c5b3b5666535C825
 s|# log_sync_start_block_number = 0|log_sync_start_block_number = 802|
 s|# rpc_listen_address = "0.0.0.0:5678"|rpc_listen_address = "0.0.0.0:5678"|
 s|# mine_contract_address = ""|mine_contract_address = "0x85F6722319538A805ED5733c5F4882d96F1C7384"|
-s|# miner_key = ""|miner_key = ""
+s|# miner_key = ""|miner_key = ""|
 ' $HOME/0g-storage-node/run/config.toml
 
 read -p "Your Private KEY: " PRIVATE_KEY
@@ -106,6 +106,7 @@ sudo systemctl status zgs
 echo ""
 printLine
 printColor blue "Check your logs        >>> tail -f ~/0g-storage-node/run/log/zgs.log.$(TZ=UTC date +%Y-%m-%d) "
+printColor blue "Check your SyncHeight  >>> curl -X POST http://localhost:5678 -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"zgs_getStatus","params":[],"id":1}' | jq
 printColor blue "Check node version     >>> $HOME/0g-storage-node/target/release/zgs_node --version "
 printLine
 printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com"
