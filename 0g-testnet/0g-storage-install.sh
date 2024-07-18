@@ -55,6 +55,7 @@ cd $HOME
 
 printColor blue "Node Configuration"
 echo ""
+echo 'export NETWORK_LISTEN_ADDRESS="$(wget -qO- eth0.me)"' >> ~/.bash_profile
 echo 'export BLOCKCHAIN_RPC_ENDPOINT="https://evm-rpc.0gchain-testnet.unitynodes.com"' >> ~/.bash_profile
 source ~/.bash_profile
 config_file="$HOME/0g-storage-node/run/config.toml"
@@ -62,15 +63,19 @@ network_height=$(curl -s https://rpc.0gchain-testnet.unitynodes.com/status | jq 
 
 sed -i '
 s|# network_dir = "network"|network_dir = "network"|
+s|# network_listen_address = "0.0.0.0"|network_listen_address = "'"$NETWORK_LISTEN_ADDRESS"'"|
 s|# network_libp2p_port = 1234|network_libp2p_port = 1234|
 s|# network_discovery_port = 1234|network_discovery_port = 1234|
-s|# rpc_enabled = true|rpc_enabled = true|
-s|# db_dir = "db"|db_dir = "db"|
-s|# log_config_file = "log_config"|log_config_file = "log_config"|
-s|# log_directory = "log"|log_directory = "log"|
-s|^blockchain_rpc_endpoint = \".*|blockchain_rpc_endpoint = "'"$BLOCKCHAIN_RPC_ENDPOINT"'"|
+s|# blockchain_rpc_endpoint = "http://127.0.0.1:8545"|blockchain_rpc_endpoint = "'"$BLOCKCHAIN_RPC_ENDPOINT"'"|
+s|# log_contract_address = ""|log_contract_address = "0x8873cc79c5b3b5666535C825205C9a128B1D75F1"|
+s|# log_sync_start_block_number = 0|log_sync_start_block_number = 802|
+s|# rpc_listen_address = "0.0.0.0:5678"|rpc_listen_address = "0.0.0.0:5678"|
+s|# mine_contract_address = ""|mine_contract_address = "0x85F6722319538A805ED5733c5F4882d96F1C7384"|
+s|# miner_key = ""|miner_key = ""
 ' $HOME/0g-storage-node/run/config.toml
-sed -i "s/^log_sync_start_block_number = .*/log_sync_start_block_number = $network_height/" $config_file
+
+read -p "Your Private KEY: " PRIVATE_KEY
+sed -i 's|^miner_key = ""|miner_key = "'"$PRIVATE_KEY"'"|' $HOME/0g-storage-node/run/config.toml
 
 
 sudo tee /etc/systemd/system/zgs.service > /dev/null <<EOF
