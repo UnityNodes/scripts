@@ -20,7 +20,7 @@ printColor blue "[4/6] Building binaries"
 cd && rm -rf 0g-chain
 git clone https://github.com/0glabs/0g-chain
 cd 0g-chain
-git checkout v0.2.5
+git checkout v0.2.3
 
 # Build binary
 make install
