@@ -68,10 +68,10 @@ s|^\s*#\s*network_listen_address = "0.0.0.0"|network_listen_address = "'"$NETWOR
 s|^\s*#\s*network_libp2p_port = 1234|network_libp2p_port = 1234|
 s|^\s*#\s*network_discovery_port = 1234|network_discovery_port = 1234|
 s|^\s*#\s*blockchain_rpc_endpoint = "http://127.0.0.1:8545"|blockchain_rpc_endpoint = "'"$BLOCKCHAIN_RPC_ENDPOINT"'"|
-s|^\s*#\s*log_contract_address = ""|log_contract_address = "0x8873cc79c5b3b5666535C825205C9a128B1D75F1"|
-s|^\s*#\s*log_sync_start_block_number = 0|log_sync_start_block_number = 802|
+s|^\s*#\s*log_contract_address = ""|log_contract_address = "0xB7e39604f47c0e4a6Ad092a281c1A8429c2440d3"|
+s|^\s*#\s*log_sync_start_block_number = 0|log_sync_start_block_number = 401178|
 s|^\s*#\s*rpc_listen_address = "0.0.0.0:5678"|rpc_listen_address = "0.0.0.0:5678"|
-s|^\s*#\s*mine_contract_address = ""|mine_contract_address = "0x85F6722319538A805ED5733c5F4882d96F1C7384"|
+s|^\s*#\s*mine_contract_address = ""|mine_contract_address = "0x6176AA095C47A7F79deE2ea473B77ebf50035421"|
 s|^\s*#\s*miner_key = ""|miner_key = ""|
 ' $HOME/0g-storage-node/run/config.toml
 
