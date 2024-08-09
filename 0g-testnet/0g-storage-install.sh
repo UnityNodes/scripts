@@ -74,7 +74,8 @@ s|^\s*#\s*rpc_listen_address = "0.0.0.0:5678"|rpc_listen_address = "0.0.0.0:5678
 s|^\s*#\s*mine_contract_address = ""|mine_contract_address = "0x6176AA095C47A7F79deE2ea473B77ebf50035421"|
 s|^\s*#\s*miner_key = ""|miner_key = ""|
 ' $HOME/0g-storage-node/run/config.toml
-sed -i 's/debug,hyper=info,h2=info/info,hyper=info,h2=info/' /root/0g-storage-node/run/log_config
+sed -i 's/debug,hyper=info,h2=info/info,hyper=info,h2=info/g' $HOME/0g-storage-node/run/log_config
+
 
 
 read -p "Your Private KEY: " PRIVATE_KEY
