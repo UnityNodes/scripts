@@ -17,11 +17,11 @@ source <(curl -s https://raw.githubusercontent.com/UnityNodes/scripts/main/depen
 echo ""
 printColor blue "[4/6] Building binaries"
 
-cd && rm -rf 0g-chain
-wget -O 0gchaind https://zgchaind-test.s3.ap-east-1.amazonaws.com/0gchaind-linux-v0.3.0
-chmod +x $HOME/0gchaind
-sudo mv $HOME/0gchaind $(which 0gchaind)
-sudo systemctl restart 0gchaind
+cd $HOME
+rm -rf 0g-chain
+git clone -b v0.2.5 https://github.com/0glabs/0g-chain.git
+cd 0g-chain
+make install
 
 0gchaind config chain-id zgtendermint_16600-2
 0gchaind config keyring-backend test
