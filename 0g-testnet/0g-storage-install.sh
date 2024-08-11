@@ -48,6 +48,8 @@ fi
 
 git clone -b v0.4.1 https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
+git fetch --all --tags
+git checkout 3d5f854
 git submodule update --init
 cargo build --release
 sudo cp $HOME/0g-storage-node/target/release/zgs_node /usr/local/bin
@@ -68,14 +70,16 @@ s|^\s*#\s*network_listen_address = "0.0.0.0"|network_listen_address = "'"$NETWOR
 s|^\s*#\s*network_libp2p_port = 1234|network_libp2p_port = 1234|
 s|^\s*#\s*network_discovery_port = 1234|network_discovery_port = 1234|
 s|^\s*#\s*blockchain_rpc_endpoint = "http://127.0.0.1:8545"|blockchain_rpc_endpoint = "'"$BLOCKCHAIN_RPC_ENDPOINT"'"|
-s|^\s*#\s*log_contract_address = ""|log_contract_address = "0xB7e39604f47c0e4a6Ad092a281c1A8429c2440d3"|
-s|^\s*#\s*log_sync_start_block_number = 0|log_sync_start_block_number = 401178|
+s|^\s*#\s*log_contract_address = ""|log_contract_address = "0xbD2C3F0E65eDF5582141C35969d66e34629cC768"|
+s|^\s*#\s*log_sync_start_block_number = 0|log_sync_start_block_number = 595059|
 s|^\s*#\s*rpc_listen_address = "0.0.0.0:5678"|rpc_listen_address = "0.0.0.0:5678"|
-s|^\s*#\s*mine_contract_address = ""|mine_contract_address = "0x6176AA095C47A7F79deE2ea473B77ebf50035421"|
+s|^\s*#\s*mine_contract_address = ""|mine_contract_address = "0x6815F41019255e00D6F34aAB8397a6Af5b6D806f"|
 s|^\s*#\s*miner_key = ""|miner_key = ""|
 ' $HOME/0g-storage-node/run/config.toml
+sed -i '$ a\reward_contract_address = "0x51998C4d486F406a788B766d93510980ae1f9360"' "$HOME/0g-storage-node/run/config.toml"
+sed -i 's/# confirmation_block_count = 12/confirmation_block_count = 6/' "$HOME/0g-storage-node/run/config.toml"
+sed -i 's/# network_boot_nodes = \[\]/network_boot_nodes = \["\/ip4\/54.219.26.22\/udp\/1234\/p2p\/16Uiu2HAmTVDGNhkHD98zDnJxQWu3i1FL1aFYeh9wiQTNu4pDCgps","\/ip4\/52.52.127.117\/udp\/1234\/p2p\/16Uiu2HAkzRjxK2gorngB1Xq84qDrT4hSVznYDHj6BkbaE4SGx9oS","\/ip4\/18.162.65.205\/udp\/1234\/p2p\/16Uiu2HAm2k6ua2mGgvZ8rTMV8GhpW71aVzkQWy7D37TTDuLCpgmX"\]/' "$HOME/0g-storage-node/run/config.toml"
 sed -i 's/debug,hyper=info,h2=info/info,hyper=info,h2=info/g' $HOME/0g-storage-node/run/log_config
-
 
 
 read -p "Your Private KEY: " PRIVATE_KEY
