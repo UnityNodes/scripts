@@ -1,4 +1,3 @@
-screen -S warden041
 cd $HOME
 rm -rf download
 mkdir download
