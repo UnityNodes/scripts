@@ -1,10 +1,11 @@
-sudo systemctl stop wardend
-
+screen -S warden041
 cd $HOME
-rm -rf wardenprotocol
-git clone https://github.com/warden-protocol/wardenprotocol
-cd wardenprotocol
-git checkout v0.4.1
-
-sudo systemctl start wardend
-sudo journalctl -u wardend -f -o cat
+rm -rf download
+mkdir download
+cd download
+wget https://github.com/warden-protocol/wardenprotocol/releases/download/v0.4.1/wardend_Linux_x86_64.zip
+unzip wardend_Linux_x86_64.zip
+rm wardend_Linux_x86_64.zip
+chmod +x $HOME/download/wardend
+sudo mv $HOME/download/wardend $(which wardend)
+sudo systemctl restart wardend && sudo journalctl -u wardend -f
