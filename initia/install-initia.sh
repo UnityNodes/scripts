@@ -21,7 +21,7 @@ cd $HOME
 rm -rf initia
 git clone https://github.com/initia-labs/initia.git
 cd initia
-git checkout v0.2.15
+git checkout v0.2.23-stage-2
 make install
 
 initiad config node tcp://localhost:26657
