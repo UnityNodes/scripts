@@ -49,7 +49,7 @@ fi
 rm -rf 0g-storage-node
 git clone https://github.com/0glabs/0g-storage-node.git
 cd 0g-storage-node
-git checkout v0.4.4 
+git checkout v0.4.6 
 git submodule update --init
 cargo build --release
 sudo cp $HOME/0g-storage-node/target/release/zgs_node /usr/local/bin
