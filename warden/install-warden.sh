@@ -21,7 +21,7 @@ cd $HOME
 rm -rf wardenprotocol
 git clone https://github.com/warden-protocol/wardenprotocol
 cd wardenprotocol
-git checkout v0.3.2
+git checkout v0.4.2
 make install
 
 wardend config set client chain-id buenavista-1
