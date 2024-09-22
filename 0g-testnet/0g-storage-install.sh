@@ -7,7 +7,7 @@ clear
 logo
 printColor blue "Install, update, package"
 sudo apt update && sudo apt upgrade -y && sleep 1
-sudo apt install curl tar wget clang pkg-config protobuf-compiler libssl-dev jq build-essential protobuf-compiler bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y && sleep 1
+sudo apt install curl tar wget clang pkg-config protobuf-compiler libssl-dev jq build-essential protobuf-compiler bsdmainutils git make ncdu gcc git jq chrony liblz4-tool lz4 aria2 pv -y && sleep 1
 sudo apt -qy upgrade -y
 sudo apt install jq -y
 
@@ -46,21 +46,27 @@ if [ -d "0g-storage-node" ]; then
   exit 1
 fi
 
-rm -rf 0g-storage-node
-git clone https://github.com/0glabs/0g-storage-node.git
-cd 0g-storage-node
-git checkout v0.4.6 
+git clone -b v0.5.1 https://github.com/0glabs/0g-storage-node.git
+cd $HOME/0g-storage-node
+git stash
+git fetch --all --tags
+git checkout 1434b94 
 git submodule update --init
 cargo build --release
-sudo cp $HOME/0g-storage-node/target/release/zgs_node /usr/local/bin
+
+printColor blue "Download Snapshots"
 cd $HOME
+wget --show-progress https://snapshots-testnet.unitynodes.com/0gchain-testnet/storage_0gchain_snapshot.lz4
+rm -rf $HOME/0g-storage-node/run/{db,log,network}
+lz4 -c -d storage_0gchain_snapshot.lz4 | pv | tar -x -C $HOME/0g-storage-node/run
+
 
 printColor blue "Node Configuration"
 echo ""
 ENR_ADDRESS=$(wget -qO- eth0.me)
 echo "export ENR_ADDRESS=${ENR_ADDRESS}" >> ~/.bash_profile
 echo 'export ZGS_LOG_DIR="$HOME/0g-storage-node/run/log"' >> ~/.bash_profile
-echo 'export ZGS_LOG_SYNC_BLOCK="762730"' >> ~/.bash_profile
+echo 'export ZGS_LOG_SYNC_BLOCK="1033320"' >> ~/.bash_profile
 echo 'export LOG_CONTRACT_ADDRESS="0xbD2C3F0E65eDF5582141C35969d66e34629cC768"' >> ~/.bash_profile
 echo 'export MINE_CONTRACT="0x6815F41019255e00D6F34aAB8397a6Af5b6D806f"' >> ~/.bash_profile
 echo 'export REWARD_CONTRACT="0x51998C4d486F406a788B766d93510980ae1f9360"' >> ~/.bash_profile
@@ -122,6 +128,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable zgs
 sudo systemctl restart zgs
 sudo systemctl status zgs
+
 
 echo ""
 printLine
