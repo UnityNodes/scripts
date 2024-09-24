@@ -65,7 +65,7 @@ EOF
 ### Download snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
-curl "https://snapshots-testnet.unitynodes.com/titan-testnet/titan-testnet-latest.tar.lz4" | lz4 -dc - | tar -xf - -C $HOME/.warden
+curl "https://snapshots-testnet.unitynodes.com/titan-testnet/titan-testnet-latest.tar.lz4" | lz4 -dc - | tar -xf - -C $HOME/.titan
 
 ### Start service and run node
 echo ""
