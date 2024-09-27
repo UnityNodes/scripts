@@ -20,7 +20,7 @@ printColor blue "[4/6] Building binaries"
 cd $HOME
 rm -rf orai
 git clone https://github.com/oraichain/orai
-cd orai/orai
+cd $HOME/orai
 git checkout v0.42.3
 make install
 
