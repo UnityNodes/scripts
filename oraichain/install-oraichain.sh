@@ -25,11 +25,6 @@ cd orai
 git checkout v0.42.3
 make install
 
-oraid config node tcp://localhost:26657
-oraid config keyring-backend test
-oraid config chain-id Oraichain
-source $HOME/.bash_profile
-
 oraid init "$MONIKER" --chain-id Oraichain
 
 ### Download addrbook
