@@ -18,26 +18,16 @@ echo ""
 printColor blue "[4/6] Building binaries"
 
 cd $HOME
-rm -rf selfchain
-git clone https://github.com/hotcrosscom/Self-Chain-Releases.git selfchain
-cd selfchain
-git checkout mainnet-v1.0.1
+wget https://github.com/hotcrosscom/Self-Chain-Releases/releases/download/mainnet-v1.0.1/selfchaind-linux-amd64
+chmod +x selfchaind-linux-amd64
+mv selfchaind-linux-amd64 $HOME/go/bin/selfchaind
 source .bash_profile
-
-selfchaind config chain-id self-1
-selfchaind config keyring-backend file
-source $HOME/.bash_profile
 
 selfchaind init "$NODE_MONIKER" --chain-id self-1
 
 ### Download genesis and addrbook
 curl -Ls https://snapshots-mainnet.unitynodes.com/selfchain-mainnet/genesis.json > $HOME/.selfchain/config/genesis.json
 curl -Ls https://snapshots-mainnet.unitynodes.com/selfchain-mainnet/addrbook.json > $HOME/.selfchain/config/addrbook.json
-
-### Seed config
-PEERS="$(curl -sS https://rpc.selfchain-mainnet.unitynodes.com/net_info | jq -r '.result.peers[] | "(.node_info.id)@(.remote_ip):(.node_info.listen_addr)"' | awk -F ':' '{print $1":"$(NF)}' | sed -z 's|
-|,|g;s|.$||')"
-sed -i -e "s|^persistent_peers *=.*|persistent_peers = "$PEERS"|" $HOME/.selfchain/config/config.toml
 
 ### Set pruning
 PRUNING="custom"
@@ -54,7 +44,7 @@ sed -i -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = "0.005uself"/" $HOME/
 ### Create service
 sudo tee /etc/systemd/system/selfchaind.service > /dev/null <<EOF
 [Unit]
-Description=selfchain testnet node
+Description=selfchain node
 After=network-online.target
 [Service]
 User=$USER
@@ -85,5 +75,5 @@ printColor blue "Check synchronization  >>> selfchaind status | jq | grep \"catc
 printLine
 printColor blue "Enjoy Unity Nodes      >>> https://unitynodes.com"
 printColor blue "Our service            >>> https://services.unitynodes.com"
-printColor blue "Our blog               >>> https://medium.com/@unitynodes"
+printColor blue "Our Twitter            >>> https://x.com/UnityNodes"
 printLine
