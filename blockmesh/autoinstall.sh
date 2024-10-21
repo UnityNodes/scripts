@@ -17,12 +17,10 @@ echo "Запуск screen сесії для BlockMesh Node..."
 screen -dmS blockmesh_node
 
 # Підключаємося до screen сесії та запускаємо ноду (замініть значення на ваші дані)
-EMAIL="andrienkoj7@gmail.coml" # Замініть на ваш емейл
-PASSWORD="1qaz2wsx" # Замініть на ваш пароль
+EMAIL="" # Замініть на ваш емейл
+PASSWORD="" # Замініть на ваш пароль
 
 # Команда для запуску ноди
 echo "Запускаємо ноду BlockMesh..."
 screen -S blockmesh_node -X stuff "./blockmesh-cli login --email $EMAIL --password $PASSWORD\n"
 
-echo "Нода запущена. Перевірте логи, щоб переконатися, що нода працює правильно. Для повернення в screen сесію використовуйте команду: screen -r blockmesh_node."
-echo "Вийти з screen можна натиснувши Ctrl + A + D."
