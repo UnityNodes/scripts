@@ -26,14 +26,13 @@ make install
 
 wardend config set client chain-id chiado_10010-1
 wardend config set client keyring-backend test
-wardend config set client node tcp://localhost:26657
 source $HOME/.bash_profile
 
 wardend init "$NODE_MONIKER" --chain-id chiado_10010-1
 
 ### Download addrbook, genesis.json
-curl -L https://snapshots-testnet.unitynodes.com/warden-testnet/genesis.json > $HOME/.warden/config/genesis.json
-curl -L https://snapshots-testnet.unitynodes.com/warden-testnet/addrbook.json > $HOME/.warden/config/addrbook.json
+curl -L https://snapshots-testnet.unitynodes.com/warden-chiado/genesis.json > $HOME/.warden/config/genesis.json
+curl -L https://snapshots-testnet.unitynodes.com/warden-chiado/addrbook.json > $HOME/.warden/config/addrbook.json
 
 ### Set seeds
 sed -i -e 's|^seeds *=.*|seeds = "2d2c7af1c2d28408f437aef3d034087f40b85401@52.51.132.79:26656,8288657cb2ba075f600911685670517d18f54f3b@warden-testnet-seed.itrocket.net:18656"|' $HOME/.warden/config/config.toml
@@ -70,7 +69,7 @@ EOF
 ### Download snapshot
 echo ""
 printColor blue "[5/6] Downloading snapshot for fast synchronization" 
-curl "https://snapshots-testnet.unitynodes.com/warden-testnet/warden-testnet-latest.tar.lz4" | lz4 -dc - | tar -xf - -C $HOME/.warden
+curl "https://snapshots-testnet.unitynodes.com/warden-chiado/warden-chiado-latest.tar.lz4" | lz4 -dc - | tar -xf - -C $HOME/.warden
 
 ### Start service and run node
 echo ""
