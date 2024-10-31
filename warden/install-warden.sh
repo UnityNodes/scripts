@@ -21,7 +21,7 @@ cd $HOME
 rm -rf wardenprotocol
 git clone https://github.com/warden-protocol/wardenprotocol
 cd wardenprotocol
-git checkout v0.5.2
+git checkout v0.5.3
 make install
 
 wardend config set client chain-id chiado_10010-1
