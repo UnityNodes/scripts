@@ -39,7 +39,14 @@ function main_menu {
                 printBlue "Installing Multiple..."
                 sudo apt update && sudo apt upgrade -y
                 ARCH=$(uname -m)
-                CLIENT_URL="https://cdn.app.multiple.cc/client/linux/${ARCH}/multipleforlinux.tar"
+                if [[ "$ARCH" == "x86_64" ]]; then
+                    CLIENT_URL="https://cdn.app.multiple.cc/client/linux/x64/multipleforlinux.tar"
+                elif [[ "$ARCH" == "aarch64" ]]; then
+                    CLIENT_URL="https://cdn.app.multiple.cc/client/linux/arm64/multipleforlinux.tar"
+                else
+                    echo -e "${RED}Unsupported architecture: $ARCH${NC}"
+                    exit 1
+                fi
                 wget $CLIENT_URL -O multipleforlinux.tar
                 tar -xvf multipleforlinux.tar && cd multipleforlinux
                 chmod +x multiple-cli multiple-node
