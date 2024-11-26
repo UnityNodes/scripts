@@ -50,7 +50,13 @@ function main_menu {
                 wget $CLIENT_URL -O multipleforlinux.tar
                 tar -xvf multipleforlinux.tar && cd multipleforlinux
                 chmod +x multiple-cli multiple-node
-                echo "PATH=\$PATH:$(pwd)" >> ~/.bash_profile && source ~/.bash_profile
+                if [[ -f ~/.bashrc ]]; then
+                    echo "PATH=\$PATH:$(pwd)" >> ~/.bashrc
+                else
+                    echo "PATH=\$PATH:$(pwd)" >> ~/.bash_profile
+                    echo "source ~/.bashrc" >> ~/.bash_profile
+                fi
+                source ~/.bash_profile
                 nohup ./multiple-node > output.log 2>&1 &
                 read -p "Enter your Account ID: " IDENTIFIER
                 read -p "Enter your PIN: " PIN
