@@ -66,7 +66,7 @@ function main_menu {
             3)
                 printBlue "Deleting node..."
                 pkill -f multiple-node
-                rm -rf ~/multipleforlinux
+                rm -rf $HOME/multipleforlinux
                 printGreen "Node deleted successfully."
                 ;;
             0)
