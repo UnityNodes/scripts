@@ -52,7 +52,6 @@ function main_menu {
                 chmod +x multiple-cli multiple-node
                 sudo echo "PATH=\$PATH:$(pwd)" >> ~/.bashrc
                 source ~/.bashrc
-                chmod -R 777
                 nohup ./multiple-node > output.log 2>&1 &
                 read -p "Enter your Account ID: " IDENTIFIER
                 read -p "Enter your PIN: " PIN
