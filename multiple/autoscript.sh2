@@ -44,19 +44,15 @@ function main_menu {
                 elif [[ "$ARCH" == "aarch64" ]]; then
                     CLIENT_URL="https://cdn.app.multiple.cc/client/linux/arm64/multipleforlinux.tar"
                 else
-                    echo -e "${RED}Unsupported architecture: $ARCH${NC}"
+                    printRed "Unsupported architecture: $ARCH${NC}"
                     exit 1
                 fi
                 wget $CLIENT_URL -O multipleforlinux.tar
                 tar -xvf multipleforlinux.tar && cd multipleforlinux
                 chmod +x multiple-cli multiple-node
-                if [[ -f ~/.bashrc ]]; then
-                    echo "PATH=\$PATH:$(pwd)" >> ~/.bashrc
-                else
-                    echo "PATH=\$PATH:$(pwd)" >> ~/.bash_profile
-                    echo "source ~/.bashrc" >> ~/.bash_profile
-                fi
-                source ~/.bash_profile
+                sudo echo "PATH=\$PATH:$(pwd)" >> ~/.bashrc
+                source ~/.bashrc
+                chmod -R 777
                 nohup ./multiple-node > output.log 2>&1 &
                 read -p "Enter your Account ID: " IDENTIFIER
                 read -p "Enter your PIN: " PIN
