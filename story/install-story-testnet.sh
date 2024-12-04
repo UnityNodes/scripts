@@ -19,7 +19,7 @@ printColor blue "[4/6] Building binaries"
 
 # Clone project repository
 cd $HOME
-wget -O geth https://github.com/piplabs/story-geth/releases/download/v0.10.0/geth-linux-amd64
+wget -O geth https://github.com/piplabs/story-geth/releases/download/v0.10.1/geth-linux-amd64
 chmod +x $HOME/geth
 sudo mv $HOME/geth $(which geth)
 
@@ -27,7 +27,7 @@ cd $HOME
 rm -rf story
 git clone https://github.com/piplabs/story
 cd story
-git checkout v0.12.0
+git checkout v0.13.0
 go build -o story ./client
 sudo mv ~/story/story ~/go/bin/
 
